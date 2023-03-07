@@ -1,5 +1,6 @@
 package com.example.sigmback.controller;
 
+import com.example.sigmback.model.Echantillon;
 import com.example.sigmback.model.Geologie;
 import com.example.sigmback.service.GeologieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,10 @@ public class GeologieController {
         return geologieService.retrieveOneGeologie(id_geologie);
     }
 
-
+    // http://localhost:8099/api/geologie/showechantillonsbygeologie/{id_geologie}
+    @GetMapping("/showechantillonsbygeologie/{id_geologie}")
+    public List<Echantillon> showEchantillonsByGeologie(@PathVariable("id_geologie") Long id_geologie){
+        return geologieService.retrieveEchantillonsByGeologie(id_geologie);
+    }
 
 }

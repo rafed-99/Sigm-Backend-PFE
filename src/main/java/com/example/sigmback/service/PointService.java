@@ -1,5 +1,6 @@
 package com.example.sigmback.service;
 
+import com.example.sigmback.model.Echantillon;
 import com.example.sigmback.model.Geologie;
 import com.example.sigmback.model.Point;
 import com.example.sigmback.repository.IPointRepository;

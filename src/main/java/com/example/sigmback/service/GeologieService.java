@@ -1,5 +1,6 @@
 package com.example.sigmback.service;
 
+import com.example.sigmback.model.Echantillon;
 import com.example.sigmback.model.Geologie;
 import com.example.sigmback.repository.IGeologieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,11 @@ public class GeologieService implements IGeologieService{
     public Geologie retrieveOneGeologie(Long id_geologie) {
 
         return iGeologieRepository.findById(id_geologie).get();
+    }
+
+    @Override
+    public List<Echantillon> retrieveEchantillonsByGeologie(Long id_geologie) {
+        return iGeologieRepository.findById(id_geologie).get().getEchantillons();
     }
 
 }

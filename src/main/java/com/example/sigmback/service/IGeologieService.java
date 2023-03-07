@@ -1,5 +1,6 @@
 package com.example.sigmback.service;
 
+import com.example.sigmback.model.Echantillon;
 import com.example.sigmback.model.Geologie;
 
 import java.util.List;
@@ -16,6 +17,6 @@ public interface IGeologieService {
 
     Geologie retrieveOneGeologie(Long id_geologie);
 
-
+    List<Echantillon> retrieveEchantillonsByGeologie(Long id_geologie);
 
 }
