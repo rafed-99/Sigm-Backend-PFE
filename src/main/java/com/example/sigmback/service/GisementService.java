@@ -49,26 +49,39 @@ public class GisementService implements IGisementService{
 
     @Override
     public List<Point> retrievePointsByGisement(Long id_gisement) {
+
         return iGisementRepository.findById(id_gisement).get().getPoints();
     }
 
     @Override
     public List<Gisement> findGisementsBySecteur(String secteur) {
+
         return iGisementRepository.findGisementsBySecteur(secteur);
     }
 
     @Override
     public Long countGisementBySecteur(String secteur) {
+
         return iGisementRepository.countGisementBySecteur(secteur);
     }
 
     @Override
     public List<Gisement> orderGisementBySecteurAsc() {
+
         return iGisementRepository.orderGisementBySecteurAsc();
     }
 
     @Override
     public List<Gisement> orderGisementBySecteurDesc() {
+
         return iGisementRepository.orderGisementBySecteurDesc();
     }
+
+    /*@Override
+    public List<Gisement> searchByLibelle(String libelle) {
+        if(libelle != null) {
+            return iGisementRepository.searchByLibelle(libelle);
+        }
+        return iGisementRepository.findAll();
+    }*/
 }

@@ -20,4 +20,6 @@ public interface IGisementService {
     List<Gisement> orderGisementBySecteurAsc();
 
     List<Gisement> orderGisementBySecteurDesc();
+
+    /*List<Gisement> searchByLibelle(String libelle);*/
 }

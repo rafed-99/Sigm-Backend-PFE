@@ -4,6 +4,7 @@ import com.example.sigmback.model.Gisement;
 import com.example.sigmback.model.Point;
 import com.example.sigmback.service.GisementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -60,24 +61,35 @@ public class GisementController {
     // http://localhost:8099/api/gisement/showgisementsbysecteur/{secteur}
     @GetMapping("/showgisementsbysecteur/{secteur}")
     public List<Gisement> showGisementBySecteur(@PathVariable("secteur") String secteur){
+
         return gisementService.findGisementsBySecteur(secteur);
     }
 
     // http://localhost:8099/api/gisement/countgisementsbysecteur/{secteur}
     @GetMapping("/countgisementsbysecteur/{secteur}")
     public Long countGisementsBySecteur(@PathVariable("secteur") String secteur){
+
         return gisementService.countGisementBySecteur(secteur);
     }
 
     // http://localhost:8099/api/gisement/ordergisementsbysecteurasc
     @GetMapping("/ordergisementsbysecteurasc")
     public List<Gisement> orderGisementsBySecteurAsc(){
+
         return gisementService.orderGisementBySecteurAsc();
     }
 
     // http://localhost:8099/api/gisement/ordergisementsbysecteurdesc
     @GetMapping("/ordergisementsbysecteurdesc")
     public List<Gisement> orderGisementsBySecteurDesc(){
+
         return gisementService.orderGisementBySecteurDesc();
     }
+
+    // http://localhost:8099/api/gisement/searchgisementsbylibelle
+    /*@GetMapping("/searchgisementsbylibelle")
+    public List<Gisement> searchGisementByLibelle(@Param("libelle") String libelle){
+
+        return gisementService.searchByLibelle(libelle);
+    }*/
 }

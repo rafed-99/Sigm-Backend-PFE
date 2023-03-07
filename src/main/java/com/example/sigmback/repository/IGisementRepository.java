@@ -22,4 +22,8 @@ public interface IGisementRepository extends JpaRepository<Gisement,Long> {
 
     @Query("select g from Gisement g order by g.secteur desc ")
     List<Gisement> orderGisementBySecteurDesc ();
+
+    /*@Query("select g from Gisement g where g.gisementLibelle like %:libelle%")
+    List<Gisement> searchByLibelle (@Param("libelle") String libelle);*/
+
 }
