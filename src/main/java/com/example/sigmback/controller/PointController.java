@@ -27,7 +27,6 @@ public class PointController {
 
         return pointService.updatePoint(point);
     }
-    
 
     // http://localhost:8099/api/point/deletepoint/{id_point}
     @DeleteMapping("/deletepoint/{id_point}")
