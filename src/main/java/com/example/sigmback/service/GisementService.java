@@ -61,4 +61,14 @@ public class GisementService implements IGisementService{
     public Long countGisementBySecteur(String secteur) {
         return iGisementRepository.countGisementBySecteur(secteur);
     }
+
+    @Override
+    public List<Gisement> orderGisementBySecteurAsc() {
+        return iGisementRepository.orderGisementBySecteurAsc();
+    }
+
+    @Override
+    public List<Gisement> orderGisementBySecteurDesc() {
+        return iGisementRepository.orderGisementBySecteurDesc();
+    }
 }

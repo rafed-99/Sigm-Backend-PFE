@@ -16,4 +16,8 @@ public interface IGisementService {
     List<Gisement> findGisementsBySecteur(String secteur);
 
     Long countGisementBySecteur(String secteur);
+
+    List<Gisement> orderGisementBySecteurAsc();
+
+    List<Gisement> orderGisementBySecteurDesc();
 }

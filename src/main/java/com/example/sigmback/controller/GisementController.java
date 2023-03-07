@@ -68,4 +68,16 @@ public class GisementController {
     public Long countGisementsBySecteur(@PathVariable("secteur") String secteur){
         return gisementService.countGisementBySecteur(secteur);
     }
+
+    // http://localhost:8099/api/gisement/ordergisementsbysecteurasc
+    @GetMapping("/ordergisementsbysecteurasc")
+    public List<Gisement> orderGisementsBySecteurAsc(){
+        return gisementService.orderGisementBySecteurAsc();
+    }
+
+    // http://localhost:8099/api/gisement/ordergisementsbysecteurdesc
+    @GetMapping("/ordergisementsbysecteurdesc")
+    public List<Gisement> orderGisementsBySecteurDesc(){
+        return gisementService.orderGisementBySecteurDesc();
+    }
 }
