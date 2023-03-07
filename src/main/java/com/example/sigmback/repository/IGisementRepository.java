@@ -14,5 +14,6 @@ public interface IGisementRepository extends JpaRepository<Gisement,Long> {
     @Query("select g from Gisement g where g.secteur=:secteur")
     List<Gisement> findGisementsBySecteur (@Param("secteur") String secteur);
 
-
+    @Query("select count (g) from Gisement g where g.secteur=:secteur")
+    Long countGisementBySecteur (@Param("secteur") String secteur);
 }

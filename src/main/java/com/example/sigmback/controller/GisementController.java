@@ -62,4 +62,10 @@ public class GisementController {
     public List<Gisement> showGisementBySecteur(@PathVariable("secteur") String secteur){
         return gisementService.findGisementsBySecteur(secteur);
     }
+
+    // http://localhost:8099/api/gisement/countgisementsbysecteur/{secteur}
+    @GetMapping("/countgisementsbysecteur/{secteur}")
+    public Long countGisementsBySecteur(@PathVariable("secteur") String secteur){
+        return gisementService.countGisementBySecteur(secteur);
+    }
 }

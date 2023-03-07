@@ -14,4 +14,6 @@ public interface IGisementService {
     List<Point> retrievePointsByGisement(Long id_gisement);
 
     List<Gisement> findGisementsBySecteur(String secteur);
+
+    Long countGisementBySecteur(String secteur);
 }
