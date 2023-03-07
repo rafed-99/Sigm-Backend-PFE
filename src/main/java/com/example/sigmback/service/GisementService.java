@@ -51,4 +51,9 @@ public class GisementService implements IGisementService{
     public List<Point> retrievePointsByGisement(Long id_gisement) {
         return iGisementRepository.findById(id_gisement).get().getPoints();
     }
+
+    @Override
+    public List<Gisement> findGisementsBySecteur(String secteur) {
+        return iGisementRepository.findGisementsBySecteur(secteur);
+    }
 }

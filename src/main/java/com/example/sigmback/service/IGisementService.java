@@ -11,6 +11,7 @@ public interface IGisementService {
     Gisement updateGisement(Gisement gisement);
     List<Gisement> retrieveGisement();
     Gisement retrieveOneGisement(Long id_gisement);
-
     List<Point> retrievePointsByGisement(Long id_gisement);
+
+    List<Gisement> findGisementsBySecteur(String secteur);
 }

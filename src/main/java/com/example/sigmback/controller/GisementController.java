@@ -56,4 +56,10 @@ public class GisementController {
 
         return gisementService.retrievePointsByGisement(id_gisement);
     }
+
+    // http://localhost:8099/api/gisement/showgisementsbysecteur/{secteur}
+    @GetMapping("/showgisementsbysecteur/{secteur}")
+    public List<Gisement> showGisementBySecteur(@PathVariable("secteur") String secteur){
+        return gisementService.findGisementsBySecteur(secteur);
+    }
 }
