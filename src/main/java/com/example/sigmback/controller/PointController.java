@@ -1,5 +1,6 @@
 package com.example.sigmback.controller;
 
+import com.example.sigmback.model.Geologie;
 import com.example.sigmback.model.Point;
 import com.example.sigmback.service.PointService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,11 @@ public class PointController {
     public Point showOnePoint(@PathVariable("id_point") Long id_point){
 
         return pointService.retrieveOnePoint(id_point);
+    }
+
+    // http://localhost:8099/api/point/showgeologiesbypoint/{id_point}
+    @GetMapping("/showgeologiesbypoint/{id_point}")
+    public List<Geologie> showGeologiesByPoints(@PathVariable("id_point") Long id_point){
+        return pointService.retrieveGeologieByPoint(id_point);
     }
 }

@@ -16,4 +16,6 @@ public interface IGeologieService {
 
     Geologie retrieveOneGeologie(Long id_geologie);
 
+
+
 }

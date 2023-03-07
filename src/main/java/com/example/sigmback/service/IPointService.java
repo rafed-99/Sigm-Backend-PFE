@@ -1,5 +1,6 @@
 package com.example.sigmback.service;
 
+import com.example.sigmback.model.Geologie;
 import com.example.sigmback.model.Point;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface IPointService {
     List<Point> retrievePoints();
 
     Point retrieveOnePoint(Long id_point);
+
+    List<Geologie> retrieveGeologieByPoint(long id_point);
 }
