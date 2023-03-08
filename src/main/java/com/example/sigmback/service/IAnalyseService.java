@@ -18,4 +18,6 @@ public interface IAnalyseService {
     Analyse retrieveOneAnalyse(Long id_analyse);
 
     List<Analyse> retrieveAnalyseByEchantillon(Long id_echantillon);
+
+
 }

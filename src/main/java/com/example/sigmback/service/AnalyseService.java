@@ -4,6 +4,7 @@ package com.example.sigmback.service;
 import com.example.sigmback.model.Analyse;
 import com.example.sigmback.repository.IAnalyseRepository;
 import com.example.sigmback.repository.IEchantillonRepository;
+import com.example.sigmback.repository.IElementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ public class AnalyseService implements IAnalyseService{
 
     @Autowired
     IEchantillonRepository iEchantillonRepository;
+
+    @Autowired
+    IElementRepository iElementRepository;
 
     @Override
     public Analyse addAnalyse(Analyse analyse) {
@@ -47,5 +51,10 @@ public class AnalyseService implements IAnalyseService{
     public List<Analyse> retrieveAnalyseByEchantillon(Long id_echantillon){
 
         return iEchantillonRepository.findById(id_echantillon).get().getAnalyses();
+    }
+
+    public List<Analyse> retrieveAnalyseByElements(Long id_element){
+
+        return iElementRepository.findById(id_element).get().getAnalyses();
     }
 }
