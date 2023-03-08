@@ -2,6 +2,7 @@ package com.example.sigmback.service;
 
 import com.example.sigmback.model.Echantillon;
 import com.example.sigmback.model.Geologie;
+import com.example.sigmback.repository.IBordereauRepository;
 import com.example.sigmback.repository.IEchantillonRepository;
 import com.example.sigmback.repository.IGeologieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class EchantillonService implements IEchantillonService{
     IGeologieService iGeologieService;
 
     @Autowired
-    IPointService iPointService;
+    IBordereauRepository iBordereauRepository;
 
     @Override
     public Echantillon addEchantillon(Echantillon echantillon) {
@@ -67,5 +68,10 @@ public class EchantillonService implements IEchantillonService{
             listech= Stream.concat(listech.stream(), retrieveEchantillonsByGeologie(g.getGeologieId()).stream()).toList();//retrieveEchantillonsByGeologie(g.getGeologieId());
         }
         return listech;
+    }
+
+    public List<Echantillon> retrieveEchantillonByBordereau(Long id_bordereau){
+
+        return iBordereauRepository.findById(id_bordereau).get().getEchantillons();
     }
 }

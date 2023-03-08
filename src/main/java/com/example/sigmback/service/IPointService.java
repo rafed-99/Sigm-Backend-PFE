@@ -19,4 +19,6 @@ public interface IPointService {
 
     List<Point> retrievePointsByGisement(Long id_gisement);
 
+    List<Point> retrieveArchiveByPoint(Long id_archive);
+
 }

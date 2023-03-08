@@ -18,4 +18,6 @@ public interface IEchantillonService {
 
 
     List<Echantillon> retrieveEchantillonsByGeologie(Long id_geologie);
+
+    List<Echantillon> retrieveEchantillonByBordereau(Long id_bordereau);
 }

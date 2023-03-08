@@ -1,5 +1,6 @@
 package com.example.sigmback.controller;
 
+import com.example.sigmback.model.Archive;
 import com.example.sigmback.model.Geologie;
 import com.example.sigmback.model.Point;
 import com.example.sigmback.service.PointService;
@@ -55,5 +56,12 @@ public class PointController {
     public List<Point> showPointsByGisement(@PathVariable("id_gisement") Long id_gisement){
 
         return pointService.retrievePointsByGisement(id_gisement);
+    }
+
+    // http://localhost:8099/api/point/showarchivebypoint/{id_archive}
+    @GetMapping("/showarchivebypoint/{id_archive}")
+    public List<Point> showArchiveByPoint(@PathVariable("id_archive") Long id_archive){
+
+        return pointService.retrieveArchiveByPoint(id_archive);
     }
 }

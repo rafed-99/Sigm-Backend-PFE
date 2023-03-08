@@ -60,4 +60,11 @@ public class EchantillonController {
     public List<Echantillon> showEchantillonsByGeologie(@PathVariable("id_geologie") Long id_geologie){
         return echantillonService.retrieveEchantillonsByGeologie(id_geologie);
     }
+
+    // http://localhost:8099/api/echantillon/showechantillonbybordereau/{id_bordereau}
+    @GetMapping("/showechantillonbybordereau/{id_bordereau}")
+    public List<Echantillon> showEchantillonByBordereau(@PathVariable("id_bordereau") Long id_bordereau){
+
+        return echantillonService.retrieveEchantillonByBordereau(id_bordereau);
+    }
 }
