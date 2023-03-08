@@ -48,4 +48,10 @@ public class AnalyseController {
 
         return analyseService.retrieveOneAnalyse(id_analyse);
     }
+
+    // http://localhost:8099/api/analyse/showanalysebyechantillon/{id_analyse}
+    @GetMapping("/showanalysebyechantillon/{id_analyse}")
+    public List<Analyse> retrieveAnalyseByEchantillon(@PathVariable("id_analyse") Long id_analyse){
+        return analyseService.retrieveAnalyseByEchantillon(id_analyse);
+    }
 }
