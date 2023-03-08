@@ -15,4 +15,7 @@ public interface IEchantillonService {
     List<Echantillon> retrieveEchantillons();
 
     Echantillon retrieveOneEchantillon(Long id_echantillon);
+
+
+    List<Echantillon> retrieveEchantillonsByGeologie(Long id_geologie);
 }

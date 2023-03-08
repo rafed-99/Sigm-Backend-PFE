@@ -50,9 +50,10 @@ public class PointController {
         return pointService.retrieveOnePoint(id_point);
     }
 
-    // http://localhost:8099/api/point/showgeologiesbypoint/{id_point}
-    @GetMapping("/showgeologiesbypoint/{id_point}")
-    public List<Geologie> showGeologiesByPoints(@PathVariable("id_point") Long id_point){
-        return pointService.retrieveGeologieByPoint(id_point);
+    // http://localhost:8099/api/point/showpointsbygisement/{id_gisement}
+    @GetMapping("/showpointsbygisement/{id_gisement}")
+    public List<Point> showPointsByGisement(@PathVariable("id_gisement") Long id_gisement){
+
+        return pointService.retrievePointsByGisement(id_gisement);
     }
 }

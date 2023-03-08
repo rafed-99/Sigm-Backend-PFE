@@ -53,10 +53,10 @@ public class GeologieController {
         return geologieService.retrieveOneGeologie(id_geologie);
     }
 
-    // http://localhost:8099/api/geologie/showechantillonsbygeologie/{id_geologie}
-    @GetMapping("/showechantillonsbygeologie/{id_geologie}")
-    public List<Echantillon> showEchantillonsByGeologie(@PathVariable("id_geologie") Long id_geologie){
-        return geologieService.retrieveEchantillonsByGeologie(id_geologie);
+    // http://localhost:8099/api/geologie/showgeologiesbypoint/{id_point}
+    @GetMapping("/showgeologiesbypoint/{id_point}")
+    public List<Geologie> showGeologiesByPoints(@PathVariable("id_point") Long id_point){
+        return geologieService.retrieveGeologieByPoint(id_point);
     }
 
 }

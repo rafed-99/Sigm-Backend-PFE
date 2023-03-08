@@ -51,13 +51,6 @@ public class GisementController {
         return gisementService.retrieveOneGisement(id_gisement);
     }
 
-    // http://localhost:8099/api/gisement/showpointsbygisement/{id_gisement}
-    @GetMapping("/showpointsbygisement/{id_gisement}")
-    public List<Point> showPointsByGisement(@PathVariable("id_gisement") Long id_gisement){
-
-        return gisementService.retrievePointsByGisement(id_gisement);
-    }
-
     // http://localhost:8099/api/gisement/showgisementsbysecteur/{secteur}
     @GetMapping("/showgisementsbysecteur/{secteur}")
     public List<Gisement> showGisementBySecteur(@PathVariable("secteur") String secteur){
@@ -71,7 +64,7 @@ public class GisementController {
 
         return gisementService.countGisementBySecteur(secteur);
     }
-
+/*
     // http://localhost:8099/api/gisement/ordergisementsbysecteurasc
     @GetMapping("/ordergisementsbysecteurasc")
     public List<Gisement> orderGisementsBySecteurAsc(){
@@ -84,7 +77,7 @@ public class GisementController {
     public List<Gisement> orderGisementsBySecteurDesc(){
 
         return gisementService.orderGisementBySecteurDesc();
-    }
+    }*/
 
     // http://localhost:8099/api/gisement/searchgisementsbylibelle
     /*@GetMapping("/searchgisementsbylibelle")

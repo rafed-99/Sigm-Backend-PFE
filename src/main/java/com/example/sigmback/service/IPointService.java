@@ -17,5 +17,6 @@ public interface IPointService {
 
     Point retrieveOnePoint(Long id_point);
 
-    List<Geologie> retrieveGeologieByPoint(long id_point);
+    List<Point> retrievePointsByGisement(Long id_gisement);
+
 }

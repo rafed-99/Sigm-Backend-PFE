@@ -17,6 +17,6 @@ public interface IGeologieService {
 
     Geologie retrieveOneGeologie(Long id_geologie);
 
-    List<Echantillon> retrieveEchantillonsByGeologie(Long id_geologie);
+    List<Geologie> retrieveGeologieByPoint(long id_point);
 
 }

@@ -3,6 +3,7 @@ package com.example.sigmback.service;
 import com.example.sigmback.model.Echantillon;
 import com.example.sigmback.model.Geologie;
 import com.example.sigmback.model.Point;
+import com.example.sigmback.repository.IGisementRepository;
 import com.example.sigmback.repository.IPointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,10 @@ public class PointService implements IPointService{
 
     @Autowired
     IPointRepository iPointRepository;
+
+    @Autowired
+    IGisementRepository iGisementRepository;
+
     @Override
     public Point addPoint(Point point) {
 
@@ -44,7 +49,8 @@ public class PointService implements IPointService{
     }
 
     @Override
-    public List<Geologie> retrieveGeologieByPoint(long id_point) {
-        return iPointRepository.findById(id_point).get().getGeologies();
+    public List<Point> retrievePointsByGisement(Long id_gisement) {
+
+        return iGisementRepository.findById(id_gisement).get().getPoints();
     }
 }

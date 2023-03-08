@@ -48,4 +48,16 @@ public class EchantillonController {
 
         return echantillonService.retrieveOneEchantillon(id_echantillon);
     }
+
+    // http://localhost:8099/api/echantillon/showechantillonsbypoint/{id_point}
+    @GetMapping("/showechantillonsbypoint/{id_point}")
+    public List<Echantillon> show(@PathVariable("id_point") Long id_point){
+        return echantillonService.retrieveEchantillonByPoint(id_point);
+    }
+
+    // http://localhost:8099/api/echantillon/showechantillonsbygeologie/{id_geologie}
+    @GetMapping("/showechantillonsbygeologie/{id_geologie}")
+    public List<Echantillon> showEchantillonsByGeologie(@PathVariable("id_geologie") Long id_geologie){
+        return echantillonService.retrieveEchantillonsByGeologie(id_geologie);
+    }
 }
