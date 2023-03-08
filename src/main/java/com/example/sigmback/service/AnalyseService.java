@@ -43,7 +43,7 @@ public class AnalyseService implements IAnalyseService{
         return iAnalyseRepository.findById(id_analyse).get();
     }
 
-
+    @Override
     public List<Analyse> retrieveAnalyseByEchantillon(Long id_echantillon){
 
         return iEchantillonRepository.findById(id_echantillon).get().getAnalyses();
