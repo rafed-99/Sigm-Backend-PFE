@@ -58,8 +58,8 @@ public class PointController {
         return pointService.retrievePointsByGisement(id_gisement);
     }
 
-    // http://localhost:8099/api/point/showarchivebypoint/{id_archive}
-    @GetMapping("/showarchivebypoint/{id_archive}")
+    // http://localhost:8099/api/point/showpointbyarchive/{id_archive}
+    @GetMapping("/showpointbyarchive/{id_archive}")
     public List<Point> showArchiveByPoint(@PathVariable("id_archive") Long id_archive){
 
         return pointService.retrieveArchiveByPoint(id_archive);
