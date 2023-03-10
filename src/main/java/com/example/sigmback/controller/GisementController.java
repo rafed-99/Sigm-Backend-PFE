@@ -1,15 +1,14 @@
 package com.example.sigmback.controller;
 
 import com.example.sigmback.model.Gisement;
-import com.example.sigmback.model.Point;
 import com.example.sigmback.service.GisementService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/gisement")
 public class GisementController {
 
