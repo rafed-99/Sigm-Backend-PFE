@@ -29,6 +29,6 @@ public class Coupure {
 
     @OneToMany(mappedBy = "coupure")
     @JsonIgnore
-    private List<Analyse> analyses;
+    private List<Analyses> analyses;
 
 }

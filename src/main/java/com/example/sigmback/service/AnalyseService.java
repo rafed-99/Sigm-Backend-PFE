@@ -1,7 +1,7 @@
 package com.example.sigmback.service;
 
 
-import com.example.sigmback.model.Analyse;
+import com.example.sigmback.model.Analyses;
 import com.example.sigmback.repository.IAnalyseRepository;
 import com.example.sigmback.repository.IEchantillonRepository;
 import com.example.sigmback.repository.IElementRepository;
@@ -23,12 +23,12 @@ public class AnalyseService implements IAnalyseService{
     IElementRepository iElementRepository;
 
     @Override
-    public Analyse addAnalyse(Analyse analyse) {
+    public Analyses addAnalyse(Analyses analyse) {
         return iAnalyseRepository.save(analyse);
     }
 
     @Override
-    public Analyse updateAnalyse(Analyse analyse) {
+    public Analyses updateAnalyse(Analyses analyse) {
         return iAnalyseRepository.save(analyse);
     }
 
@@ -38,22 +38,22 @@ public class AnalyseService implements IAnalyseService{
     }
 
     @Override
-    public List<Analyse> retrieveAnalyses() {
+    public List<Analyses> retrieveAnalyses() {
         return iAnalyseRepository.findAll();
     }
 
     @Override
-    public Analyse retrieveOneAnalyse(Long id_analyse) {
+    public Analyses retrieveOneAnalyse(Long id_analyse) {
         return iAnalyseRepository.findById(id_analyse).get();
     }
 
     @Override
-    public List<Analyse> retrieveAnalyseByEchantillon(Long id_echantillon){
+    public List<Analyses> retrieveAnalyseByEchantillon(Long id_echantillon){
 
         return iEchantillonRepository.findById(id_echantillon).get().getAnalyses();
     }
 
-    public List<Analyse> retrieveAnalyseByElements(Long id_element){
+    public List<Analyses> retrieveAnalyseByElements(Long id_element){
 
         return iElementRepository.findById(id_element).get().getAnalyses();
     }

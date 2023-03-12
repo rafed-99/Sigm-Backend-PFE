@@ -74,5 +74,5 @@ public class Echantillon {
 
     @OneToMany(mappedBy = "echantillon")
     @JsonIgnore
-    private List<Analyse> analyses;
+    private List<Analyses> analyses;
 }

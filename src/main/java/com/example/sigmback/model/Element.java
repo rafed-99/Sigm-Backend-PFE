@@ -29,5 +29,5 @@ public class Element {
 
     @OneToMany(mappedBy = "element")
     @JsonIgnore
-    private List<Analyse> analyses;
+    private List<Analyses> analyses;
 }

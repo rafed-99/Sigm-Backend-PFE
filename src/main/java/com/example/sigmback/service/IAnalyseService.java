@@ -1,23 +1,22 @@
 package com.example.sigmback.service;
 
-import com.example.sigmback.model.Analyse;
-import com.example.sigmback.model.Archive;
+import com.example.sigmback.model.Analyses;
 
 import java.util.List;
 
 public interface IAnalyseService {
 
-    Analyse addAnalyse(Analyse analyse);
+    Analyses addAnalyse(Analyses analyse);
 
-    Analyse updateAnalyse(Analyse analyse);
+    Analyses updateAnalyse(Analyses analyse);
 
     void deleteAnalyse(Long id_analyse);
 
-    List<Analyse> retrieveAnalyses();
+    List<Analyses> retrieveAnalyses();
 
-    Analyse retrieveOneAnalyse(Long id_analyse);
+    Analyses retrieveOneAnalyse(Long id_analyse);
 
-    List<Analyse> retrieveAnalyseByEchantillon(Long id_echantillon);
+    List<Analyses> retrieveAnalyseByEchantillon(Long id_echantillon);
 
 
 }
