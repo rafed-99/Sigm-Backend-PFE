@@ -28,7 +28,8 @@ public class Gisement {
     private String gisementLibelle;
 
     @Column(name = "secteur",length = 45,nullable = false)
-    private String secteur;
+    @Enumerated(EnumType.STRING)
+    private Secteur secteur;
 
     //table mere (relation gisement et point)
     @OneToMany(mappedBy = "gisement")
