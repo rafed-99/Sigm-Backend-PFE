@@ -37,7 +37,7 @@ public class CoucheController {
     }
 
     // http://localhost:8099/api/couche/showcouches
-    @GetMapping("/showcouche")
+    @GetMapping("/showcouches")
     public List<Couche> showCouches(){
 
         return coucheService.retrieveCouches();
