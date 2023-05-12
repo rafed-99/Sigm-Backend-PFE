@@ -1,9 +1,6 @@
 package com.example.sigmback.service;
 
-import com.example.sigmback.model.Archive;
-import com.example.sigmback.model.Echantillon;
-import com.example.sigmback.model.Geologie;
-import com.example.sigmback.model.Point;
+import com.example.sigmback.model.*;
 import com.example.sigmback.repository.IArchiveRepository;
 import com.example.sigmback.repository.IGisementRepository;
 import com.example.sigmback.repository.IPointRepository;
@@ -62,5 +59,18 @@ public class PointService implements IPointService{
     @Override
     public List<Point> retrieveArchiveByPoint(Long id_archive){
         return iArchiveRepository.findById(id_archive).get().getPoints();
+    }
+
+    public Point addwithaffectation (Long id_gisement, Point point){
+        Gisement gisement = iGisementRepository.findById(id_gisement).orElse(null);
+        point.setGisement(gisement);
+        return iPointRepository.save(point);
+    }
+
+    public Point addToArchive(Long id_point, Long id_archive){
+        Archive archive = iArchiveRepository.findById(id_archive).orElse(null);
+        Point point = iPointRepository.findById(id_point).orElse(null);
+        point.setArchive(archive);
+        return iPointRepository.save(point);
     }
 }

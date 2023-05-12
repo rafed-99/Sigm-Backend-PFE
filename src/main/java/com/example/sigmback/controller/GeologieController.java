@@ -2,6 +2,7 @@ package com.example.sigmback.controller;
 
 import com.example.sigmback.model.Echantillon;
 import com.example.sigmback.model.Geologie;
+import com.example.sigmback.model.Point;
 import com.example.sigmback.service.GeologieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin()
 @RequestMapping("/api/geologie")
 public class GeologieController {
 
@@ -58,6 +59,13 @@ public class GeologieController {
     @GetMapping("/showgeologiesbypoint/{id_point}")
     public List<Geologie> showGeologiesByPoints(@PathVariable("id_point") Long id_point){
         return geologieService.retrieveGeologieByPoint(id_point);
+    }
+
+    // http://localhost:8099/api/geologie/addaffect/{id_point}/{id_couche}
+    @PostMapping("/addaffect/{id_point}/{id_couche}")
+    public Geologie addAffect(@RequestBody Geologie geologie, @PathVariable(name = "id_point")  Long id_point, @PathVariable(name = "id_couche")  Long id_couche){
+
+        return geologieService.addwithaffectation(id_point,id_couche,geologie);
     }
 
 }

@@ -56,7 +56,7 @@ public class Point {
     @Column(name = "depth_max",length = 10)
     private String depthMax;
 
-    @Column(name = "export_gis",nullable = false)
+    @Column(name = "export_gis")
     private Boolean exportGis;
 
     @Column(name = "niveau_pizometrique")

@@ -2,6 +2,7 @@ package com.example.sigmback.controller;
 
 import com.example.sigmback.model.Archive;
 import com.example.sigmback.model.Geologie;
+import com.example.sigmback.model.Gisement;
 import com.example.sigmback.model.Point;
 import com.example.sigmback.service.PointService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,4 +66,21 @@ public class PointController {
 
         return pointService.retrieveArchiveByPoint(id_archive);
     }
+
+    // http://localhost:8099/api/point/addaffect/{id_gisement}
+    @PostMapping("/addaffect/{id_gisement}")
+    public Point addAffect(@RequestBody Point point, @PathVariable(name = "id_gisement")  Long id_gisement){
+
+        return pointService.addwithaffectation(id_gisement,point);
+    }
+
+    // http://localhost:8099/api/point/addaffect/{id_gisement}
+    @PostMapping("/addaffect/{id_gisement}/{id_archive}")
+    public Point addAffect(@PathVariable(name = "id_gisement")  Long id_gisement, @PathVariable(name = "id_archive")  Long id_archive){
+
+        return pointService.addToArchive(id_gisement,id_archive);
+
+    }
+
+
 }

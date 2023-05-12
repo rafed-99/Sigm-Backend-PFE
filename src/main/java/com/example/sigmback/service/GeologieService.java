@@ -1,7 +1,7 @@
 package com.example.sigmback.service;
 
-import com.example.sigmback.model.Echantillon;
-import com.example.sigmback.model.Geologie;
+import com.example.sigmback.model.*;
+import com.example.sigmback.repository.ICoucheRepository;
 import com.example.sigmback.repository.IGeologieRepository;
 import com.example.sigmback.repository.IPointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,9 @@ public class GeologieService implements IGeologieService{
 
     @Autowired
     IPointRepository iPointRepository;
+
+    @Autowired
+    ICoucheRepository iCoucheRepository;
 
 
     @Override
@@ -66,4 +69,18 @@ public class GeologieService implements IGeologieService{
     public List<Geologie> retrieveGeologieByPoint(long id_point) {
         return iPointRepository.findById(id_point).get().getGeologies();
     }
+
+    public Geologie addwithaffectation (Long id_point, Long id_couche, Geologie geologie){
+        Point point = iPointRepository.findById(id_point).orElse(null);
+        Couche couche = iCoucheRepository.findById(id_couche).orElse(null);
+        geologie.setPoint(point);
+        geologie.setCouche(couche);
+        Float dTo = geologie.getDepthTo();
+        Float dFrom = geologie.getDepthFrom();
+        geologie.setPuissance(dTo-dFrom) ;
+        System.out.println("puissance: "+geologie.getPuissance());
+        return iGeologieRepository.save(geologie);
+    }
+
+
 }

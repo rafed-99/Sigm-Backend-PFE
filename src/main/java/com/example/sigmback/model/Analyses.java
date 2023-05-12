@@ -21,8 +21,9 @@ public class Analyses {
     @Column(name = "valeur_Analyse",nullable = false)
     private Float valeurAnalyse;
 
+
+    @Column(name = "etat_Analyse",nullable = false,columnDefinition = "varchar(255) default 'Nouvelle' ")
     @Enumerated(EnumType.STRING)
-    @Column(name = "etat_Analyse",nullable = false,columnDefinition = "varchar(255) default 'Nouvelle'")
     private EtatAnalyse etatAnalyse;
 
     @ManyToOne

@@ -29,9 +29,9 @@ public class Bordereau {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateEnvoi;
 
-    @Column(name = "analyse_demande",nullable = false,columnDefinition = "varchar(255) default 'Analyse_Complete'")
-    @Enumerated(EnumType.STRING)
-    private AnalyseDemande analyseDemande;
+    @Column(name = "analyse_demande",columnDefinition = "varchar(255) default 'Analyse Complete'")
+    //@Enumerated(EnumType.STRING)
+    private String analyseDemande;
 
     @Column(name = "exigences",length = 50)
     private String exigences;
@@ -55,6 +55,5 @@ public class Bordereau {
 
     @ManyToOne
     @JoinColumn
-    @JsonIgnore
     private Archive archive;
 }

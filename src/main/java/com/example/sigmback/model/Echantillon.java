@@ -52,15 +52,21 @@ public class Echantillon {
     @Column(name = "notes_CentreRecherche",length = 100)
     private String notesCentreRecherche;
 
+    //@Column(name = "etat_Echantillons",columnDefinition = "varchar(255) default 'Nouveau' ")
+
+    @Column(name = "etat_Echantillon",columnDefinition = "varchar(255) default 'Nouvelle' ")
     @Enumerated(EnumType.STRING)
-    @Column(name = "etat_Echantillons",columnDefinition = "varchar(255) default 'Nouveau'")
     private EtatEchantillon etatEchantillon;
+
 
     @Column(name = "analyse_Granulometrique",length = 100)
     private String analyseGranulometrique;
 
     @Column(name = "analyse_Mineralogique",length = 100)
     private String notesMineralogique;
+
+    @Column(name = "puissance_Reelle")
+    private Float puissanceReelle;
 
     //table fille(relation echantillon et geologie)
     @ManyToOne
