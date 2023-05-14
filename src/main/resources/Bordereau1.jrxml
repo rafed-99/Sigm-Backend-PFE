@@ -1,63 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.3.final using JasperReports Library version 6.20.3-415f9428cffdb6805c6f85bbb29ebaf18813a2ab  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bordereau1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="da5ecf0e-9be7-4331-b0c4-861b0c70daa2">
-    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-    <style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
-        <box>
-            <pen lineWidth="0.5" lineColor="#000000"/>
-            <topPen lineWidth="0.5" lineColor="#000000"/>
-            <leftPen lineWidth="0.5" lineColor="#000000"/>
-            <bottomPen lineWidth="0.5" lineColor="#000000"/>
-            <rightPen lineWidth="0.5" lineColor="#000000"/>
-        </box>
-    </style>
-    <style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
-        <box>
-            <pen lineWidth="0.5" lineColor="#000000"/>
-            <topPen lineWidth="0.5" lineColor="#000000"/>
-            <leftPen lineWidth="0.5" lineColor="#000000"/>
-            <bottomPen lineWidth="0.5" lineColor="#000000"/>
-            <rightPen lineWidth="0.5" lineColor="#000000"/>
-        </box>
-    </style>
-    <style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
-        <box>
-            <pen lineWidth="0.5" lineColor="#000000"/>
-            <topPen lineWidth="0.5" lineColor="#000000"/>
-            <leftPen lineWidth="0.5" lineColor="#000000"/>
-            <bottomPen lineWidth="0.5" lineColor="#000000"/>
-            <rightPen lineWidth="0.5" lineColor="#000000"/>
-        </box>
-    </style>
-    <subDataset name="Dataset1" uuid="1acd4f85-b500-4a1f-8f9d-d464a77e3f38">
-        <queryString>
-            <![CDATA[]]>
-        </queryString>
-        <field name="depthFrom" class="java.lang.Float"/>
-        <field name="depthTo" class="java.lang.Float"/>
-        <field name="puissanceReelle" class="java.lang.Float"/>
-        <field name="observation" class="java.lang.String"/>
-    </subDataset>
-    <parameter name="Dataset1" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bordereau3" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d5b8b02c-5cd7-4cce-907d-e7efa994b57e">
     <queryString>
         <![CDATA[]]>
     </queryString>
     <field name="bordereau.bordereauCode" class="java.lang.String"/>
+    <field name="bordereau.urgences" class="java.lang.Object"/>
     <field name="bordereau.analyseDemande" class="java.lang.String"/>
     <field name="bordereau.exigences" class="java.lang.String"/>
-    <field name="bordereau.urgences" class="java.lang.Object"/>
+    <field name="echantillonId" class="java.lang.Long"/>
+    <field name="depthFrom" class="java.lang.Float"/>
+    <field name="depthTo" class="java.lang.Float"/>
+    <field name="puissanceReelle" class="java.lang.Float"/>
+    <field name="observation" class="java.lang.String"/>
     <background>
         <band splitType="Stretch"/>
     </background>
     <title>
-        <band height="80" splitType="Stretch">
+        <band height="38" splitType="Stretch"/>
+    </title>
+    <pageHeader>
+        <band height="482" splitType="Stretch">
             <frame>
-                <reportElement x="81" y="0" width="399" height="80" uuid="e9e937c2-791b-4f85-96f1-21d6942be7c1"/>
+                <reportElement x="-11" y="79" width="281" height="70" uuid="a658d447-6583-4d7c-bfb5-49a4af90bc9c"/>
+                <staticText>
+                    <reportElement x="0" y="0" width="82" height="70" uuid="a979c406-c879-47bb-ac21-ee32ef3f426b"/>
+                    <textElement>
+                        <font size="18"/>
+                    </textElement>
+                    <text><![CDATA[
+Receipt : ]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="82" y="21" width="199" height="34" uuid="15fd131a-9ed5-4c76-bc38-71bfd5123348"/>
+                    <textElement>
+                        <font size="19"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{bordereau.bordereauCode}]]></textFieldExpression>
+                </textField>
+            </frame>
+            <frame>
+                <reportElement x="-11" y="154" width="566" height="144" uuid="756a3b24-dcf2-4abc-a414-e0ef00b77c20"/>
+                <box>
+                    <pen lineWidth="1.5"/>
+                </box>
+                <staticText>
+                    <reportElement x="10" y="16" width="200" height="24" uuid="8cee3534-ce00-44f5-9469-b95403ece1df"/>
+                    <textElement>
+                        <font size="18" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Analyzes Requested :]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="9" y="49" width="537" height="81" uuid="00070253-70a2-4b4f-9de1-67810d347821"/>
+                    <textElement>
+                        <font size="14"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{bordereau.analyseDemande}]]></textFieldExpression>
+                </textField>
+            </frame>
+            <frame>
+                <reportElement x="-11" y="305" width="566" height="93" uuid="781ed075-681e-41fa-8a67-f17375b893d3"/>
+                <box>
+                    <pen lineWidth="1.5"/>
+                </box>
+                <staticText>
+                    <reportElement x="8" y="11" width="149" height="30" uuid="5e29d37a-d765-4aa5-a3c6-0a5189729fb4"/>
+                    <textElement>
+                        <font size="18" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Requirements :]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="8" y="49" width="542" height="41" uuid="29abc027-0653-46fc-a915-6f35f90bf225"/>
+                    <textElement>
+                        <font size="14"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{bordereau.exigences}]]></textFieldExpression>
+                </textField>
+            </frame>
+            <frame>
+                <reportElement x="-11" y="403" width="566" height="71" uuid="acffaa4f-7e1e-4ec1-87e0-9bd52ed4823a"/>
+                <box>
+                    <pen lineWidth="1.5"/>
+                </box>
+                <staticText>
+                    <reportElement x="9" y="5" width="100" height="30" uuid="f90766bd-dfa2-42be-a7f1-4fe88938bb86"/>
+                    <textElement>
+                        <font size="18" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Urgency :]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="8" y="39" width="282" height="31" uuid="141c8caf-de86-48ec-b1c0-1fe08aa2b7f2"/>
+                    <textElement>
+                        <font size="14"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{bordereau.urgences}]]></textFieldExpression>
+                </textField>
+            </frame>
+            <frame>
+                <reportElement x="86" y="5" width="399" height="70" uuid="37b7fe14-b8ba-4b28-9b30-1ef2fdd44313"/>
                 <box>
                     <pen lineWidth="4.0" lineStyle="Solid" lineColor="#117BAD"/>
                 </box>
                 <staticText>
-                    <reportElement x="0" y="10" width="398" height="60" uuid="bc1a5f3b-b78e-41de-a4de-8b6817008209"/>
+                    <reportElement x="0" y="10" width="398" height="60" uuid="206957e1-2ebb-40a0-902a-a02c099f4452"/>
                     <textElement textAlignment="Center">
                         <font size="19"/>
                     </textElement>
@@ -66,199 +114,93 @@ Geology Sub-Directorate]]></text>
                 </staticText>
             </frame>
         </band>
-    </title>
-    <pageHeader>
-        <band height="70" splitType="Stretch">
-            <frame>
-                <reportElement x="-1" y="0" width="281" height="70" uuid="caed1b5e-4e2f-43d5-9e09-66ab0589f0ca"/>
-                <staticText>
-                    <reportElement x="0" y="0" width="82" height="70" uuid="362f3ae1-5b85-4d55-b3d7-4bc5fcbd2a59"/>
-                    <textElement>
-                        <font size="18"/>
-                    </textElement>
-                    <text><![CDATA[
-Receipt : ]]></text>
-                </staticText>
-                <textField>
-                    <reportElement x="82" y="21" width="199" height="34" uuid="38f86c1a-e1df-44f3-8868-befff9b789bc"/>
-                    <textElement>
-                        <font size="19"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$F{bordereau.bordereauCode}]]></textFieldExpression>
-                </textField>
-            </frame>
-        </band>
     </pageHeader>
     <columnHeader>
-        <band height="144" splitType="Stretch">
-            <frame>
-                <reportElement x="-1" y="0" width="557" height="144" uuid="fa1bb1dc-39d3-4bd1-b9bc-2bb1ad77f372"/>
-                <box>
-                    <pen lineWidth="1.5"/>
-                </box>
-                <staticText>
-                    <reportElement x="10" y="16" width="200" height="24" uuid="43f04d8f-9363-488d-967a-ef837272a1b2"/>
-                    <textElement>
-                        <font size="18" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[Analyzes Requested :]]></text>
-                </staticText>
-                <textField>
-                    <reportElement x="9" y="49" width="537" height="81" uuid="3c0e2da9-e156-499b-829f-00d49e3b2539"/>
-                    <textElement>
-                        <font size="14"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$F{bordereau.analyseDemande}]]></textFieldExpression>
-                </textField>
-            </frame>
+        <band height="59" splitType="Stretch">
+            <staticText>
+                <reportElement mode="Opaque" x="-10" y="39" width="81" height="19" forecolor="#000000" backcolor="#E6E6E6" uuid="33ddf05c-5a9f-47ea-8276-5ba41c9362b4"/>
+                <textElement textAlignment="Center">
+                    <font size="11" isBold="true"/>
+                </textElement>
+                <text><![CDATA[ID]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="71" y="39" width="81" height="19" forecolor="#000000" backcolor="#E6E6E6" uuid="3852b264-28e6-4923-8cd4-d51057abdd2d"/>
+                <textElement textAlignment="Center">
+                    <font size="11" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Depth From]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="153" y="39" width="81" height="19" forecolor="#000000" backcolor="#E6E6E6" uuid="7ee40d3f-ffa1-4843-8c65-d551de0a095e"/>
+                <textElement textAlignment="Center">
+                    <font size="11" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Depth To]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="236" y="39" width="81" height="19" forecolor="#000000" backcolor="#E6E6E6" uuid="d7ff5042-a3d4-4067-9343-9d82e19eafbe"/>
+                <textElement textAlignment="Center">
+                    <font size="11" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Real Volume]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="316" y="39" width="240" height="19" forecolor="#000000" backcolor="#E6E6E6" uuid="f2db0965-ddbf-4a4f-884c-66acea769ab0"/>
+                <textElement textAlignment="Center">
+                    <font size="11" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Observation]]></text>
+            </staticText>
         </band>
     </columnHeader>
     <detail>
-        <band height="209" splitType="Stretch">
-            <frame>
-                <reportElement x="-1" y="11" width="557" height="106" uuid="591a6738-77dd-426a-a7ca-3d62ff6932fa"/>
-                <box>
-                    <pen lineWidth="1.5"/>
-                </box>
-                <staticText>
-                    <reportElement x="8" y="11" width="149" height="30" uuid="cfaeaae6-43b0-4148-8c70-4d2d5604cb18"/>
-                    <textElement>
-                        <font size="18" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[Requirements :]]></text>
-                </staticText>
-                <textField>
-                    <reportElement x="8" y="49" width="542" height="51" uuid="12bec6ee-1d1e-467d-af8a-c90b1ed00f45"/>
-                    <textElement>
-                        <font size="14"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$F{bordereau.exigences}]]></textFieldExpression>
-                </textField>
-            </frame>
-            <frame>
-                <reportElement x="-1" y="129" width="557" height="71" uuid="6fbfcbea-9efb-4f5a-a5f4-80409f05949b"/>
-                <box>
-                    <pen lineWidth="1.5"/>
-                </box>
-                <staticText>
-                    <reportElement x="9" y="5" width="100" height="30" uuid="cafc8ee0-b88c-4f32-8b0a-d82ebfd3b244"/>
-                    <textElement>
-                        <font size="18" isBold="true"/>
-                    </textElement>
-                    <text><![CDATA[Urgency :]]></text>
-                </staticText>
-                <textField>
-                    <reportElement x="8" y="39" width="282" height="31" uuid="05ff3779-a44a-43bc-aa82-4b3be4a20b8f"/>
-                    <textElement>
-                        <font size="14"/>
-                    </textElement>
-                    <textFieldExpression><![CDATA[$F{bordereau.urgences}]]></textFieldExpression>
-                </textField>
-            </frame>
+        <band height="25" splitType="Stretch">
+            <textField textAdjust="StretchHeight">
+                <reportElement x="-10" y="0" width="81" height="21" uuid="078a0b05-1bba-4ac3-b46a-c6bc0d171be7"/>
+                <textElement textAlignment="Center">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{echantillonId}]]></textFieldExpression>
+            </textField>
+            <textField textAdjust="StretchHeight">
+                <reportElement x="71" y="1" width="81" height="21" uuid="5159b2ac-fede-4d63-a7ac-e644d1ec0374"/>
+                <textElement textAlignment="Center">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{depthFrom}]]></textFieldExpression>
+            </textField>
+            <textField textAdjust="StretchHeight">
+                <reportElement x="151" y="0" width="85" height="21" uuid="ec6548ba-fbbc-4ebb-a895-38762453ab08"/>
+                <textElement textAlignment="Center">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{depthTo}]]></textFieldExpression>
+            </textField>
+            <textField textAdjust="StretchHeight">
+                <reportElement x="235" y="1" width="81" height="21" uuid="00d7bc95-56cf-42f0-a546-d94dc31e2ab3"/>
+                <textElement textAlignment="Center">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{puissanceReelle}]]></textFieldExpression>
+            </textField>
+            <textField textAdjust="StretchHeight">
+                <reportElement x="315" y="0" width="241" height="21" uuid="59b79ddc-b828-4b1e-b6f4-fc5d1814755e"/>
+                <textElement textAlignment="Center">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{observation}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="-10" y="20" width="581" height="1" uuid="c38e9b67-58df-44d4-ac92-c5f4b729b69f"/>
+            </line>
         </band>
     </detail>
     <columnFooter>
-        <band height="209" splitType="Stretch">
-            <componentElement>
-                <reportElement x="-1" y="0" width="640" height="160" uuid="273e58ae-63db-4a51-a5a4-f85c4e85ed77">
-                    <property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
-                    <property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
-                    <property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
-                    <property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
-                </reportElement>
-                <jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-                    <datasetRun subDataset="Dataset1" uuid="bf549173-dda1-49e0-9277-c7231a95a1a6">
-                        <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
-                    </datasetRun>
-                    <jr:column width="110" uuid="f8e33bdc-ea6e-49cc-a788-437517843a89">
-                        <property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
-                        <jr:tableHeader style="Table_TH" height="30" rowSpan="1">
-                            <staticText>
-                                <reportElement x="0" y="0" width="110" height="30" uuid="e90faa42-09ff-4919-83af-551ab5edb1d4"/>
-                                <text><![CDATA[Depth From]]></text>
-                            </staticText>
-                        </jr:tableHeader>
-                        <jr:detailCell style="Table_TD" height="30">
-                            <frame>
-                                <reportElement x="0" y="0" width="110" height="30" uuid="0c3eaaae-493f-4b3f-91ed-a971c1f7d38f"/>
-                                <textField>
-                                    <reportElement x="0" y="0" width="110" height="30" uuid="cb6ba7ef-e5da-4375-8fe4-397192b64ce3"/>
-                                    <textFieldExpression><![CDATA[$F{depthFrom}]]></textFieldExpression>
-                                </textField>
-                            </frame>
-                        </jr:detailCell>
-                    </jr:column>
-                    <jr:column width="120" uuid="c53494e4-9cef-4aff-9a7d-b3f24547abc7">
-                        <property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
-                        <jr:tableHeader style="Table_TH" height="30" rowSpan="1">
-                            <staticText>
-                                <reportElement x="0" y="0" width="120" height="30" uuid="485a04f2-9628-4ad3-8ffa-cd5c11c0e4b3"/>
-                                <text><![CDATA[Depth To]]></text>
-                            </staticText>
-                        </jr:tableHeader>
-                        <jr:detailCell style="Table_TD" height="30">
-                            <frame>
-                                <reportElement x="0" y="0" width="120" height="30" uuid="3d397028-2cdc-4af5-9645-42477e31c1d3"/>
-                                <textField>
-                                    <reportElement x="0" y="0" width="120" height="30" uuid="552dce09-b6db-4466-9645-8273c1a3476b"/>
-                                    <textFieldExpression><![CDATA[$F{depthTo}]]></textFieldExpression>
-                                </textField>
-                            </frame>
-                        </jr:detailCell>
-                    </jr:column>
-                    <jr:column width="140" uuid="05804005-bb8b-405d-b24c-055fcbb57701">
-                        <property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
-                        <jr:tableHeader style="Table_TH" height="30" rowSpan="1">
-                            <staticText>
-                                <reportElement x="0" y="0" width="140" height="30" uuid="46345bcf-e097-47ab-a9e4-dc5f65879057"/>
-                                <text><![CDATA[Real Volume]]></text>
-                            </staticText>
-                        </jr:tableHeader>
-                        <jr:detailCell style="Table_TD" height="30">
-                            <frame>
-                                <reportElement x="0" y="0" width="140" height="30" uuid="c2499c0e-b7ba-42fc-86bb-8639f1ee54b6"/>
-                                <textField>
-                                    <reportElement x="0" y="0" width="140" height="30" uuid="6933ab4d-07c2-4328-876d-0e7862a87794"/>
-                                    <textFieldExpression><![CDATA[$F{puissanceReelle}]]></textFieldExpression>
-                                </textField>
-                            </frame>
-                        </jr:detailCell>
-                    </jr:column>
-                    <jr:column width="180" uuid="e4d383c2-2f2f-4063-b105-d3f2fc6bf93d">
-                        <property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
-                        <jr:tableHeader style="Table_TH" height="30" rowSpan="1">
-                            <staticText>
-                                <reportElement x="0" y="0" width="180" height="30" uuid="bf5340e0-9113-40f7-ac9e-4f4e724e3098"/>
-                                <text><![CDATA[Observation]]></text>
-                            </staticText>
-                        </jr:tableHeader>
-                        <jr:detailCell style="Table_TD" height="30">
-                            <frame>
-                                <reportElement x="0" y="0" width="180" height="30" uuid="3031426b-79ca-4f6a-9de2-0db1e5e39048"/>
-                                <textField>
-                                    <reportElement x="0" y="0" width="180" height="30" uuid="664d8028-aee3-402a-a046-e6a27243896d"/>
-                                    <textFieldExpression><![CDATA[$F{observation}]]></textFieldExpression>
-                                </textField>
-                            </frame>
-                        </jr:detailCell>
-                    </jr:column>
-                </jr:table>
-            </componentElement>
-        </band>
+        <band height="45" splitType="Stretch"/>
     </columnFooter>
     <pageFooter>
-        <band height="54" splitType="Stretch">
-            <frame>
-                <reportElement x="481" y="0" width="75" height="41" uuid="097fba9c-152f-4766-aa97-eefed2cf47d9"/>
-                <staticText>
-                    <reportElement x="0" y="0" width="74" height="41" uuid="77e3802f-31c1-48e0-a3d0-f3484e721982"/>
-                    <textElement textAlignment="Center">
-                        <font size="19"/>
-                    </textElement>
-                    <text><![CDATA[CPG]]></text>
-                </staticText>
-            </frame>
-        </band>
+        <band height="54" splitType="Stretch"/>
     </pageFooter>
     <summary>
         <band height="42" splitType="Stretch"/>

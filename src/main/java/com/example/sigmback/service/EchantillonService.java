@@ -98,8 +98,8 @@ public class EchantillonService implements IEchantillonService{
         List<Echantillon> echantillons1 = new ArrayList<>();
 
 
-        Integer i;
-        for(i=0 ; i<echantillons.size();i++){
+
+        for(Integer i=0 ; i<echantillons.size();i++){
             System.out.println(i);
             echantillons.get(i).setBordereau(bordereau);
             iEchantillonRepository.save(echantillons.get(i));
@@ -109,28 +109,26 @@ public class EchantillonService implements IEchantillonService{
         }
 
         String path = "C:\\ReportSigm";
-
+        //String path = "C:\\ReportSigm\\bordereau.pdf";
         //load file and compile it
         //File file = ResourceUtils.getFile("classpath:bordereaux.jrxml");
         /*JasperReport jasperReport = JasperCompileManager.compileReport(getClass().getResourceAsStream("/reports/bordereau1.jrxml"));
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(echantillons);
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(echantillons1);
         Map<String, Object> parameters = new HashMap<>();
-        //parameters.put("", "");
+        parameters.put("Dataset1", dataSource);
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-        JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\bordereau.pdf");
-        File bordereau1 = new File(path +"\\bordereau.pdf" );
+        JasperExportManager.exportReportToPdfFile(jasperPrint, path);
+        File bordereau1 = new File(path);
         return bordereau1;*/
         //load file and compile it
 
 
         File file = ResourceUtils.getFile("classpath:bordereau1.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(echantillons1);
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(echantillons);
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("createdBy", "Java Techie");
+        parameters.put("Dataset1", dataSource);
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-
-
         JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\bordereau1.pdf");
 
         return file;
