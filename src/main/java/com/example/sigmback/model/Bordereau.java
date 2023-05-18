@@ -6,7 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -25,8 +28,8 @@ public class Bordereau {
     @Column(name = "bordereau_Code",length = 15,unique = true)
     private String bordereauCode;
 
-    @Column(name = "date_Envoi",nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_Envoi",nullable = false, updatable = false)
+    @CreationTimestamp
     private Date dateEnvoi;
 
     @Column(name = "analyse_demande",columnDefinition = "varchar(255) default 'Analyse Complete'")
@@ -46,6 +49,7 @@ public class Bordereau {
 
     @Column(name = "date_Reception")
     @Temporal(TemporalType.DATE)
+    @CreatedDate
     private Date dateReception;
 
     //table mere(relation entre bordereau et echantillon)

@@ -1,5 +1,7 @@
 package com.example.sigmback.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public enum Urgences {
-    Normale, Urgente, Tres_Urgente
+    @JsonProperty("Normal")Normale , @JsonProperty("Urgent")Urgente, @JsonProperty("Very Urgent")Tres_Urgente
 }

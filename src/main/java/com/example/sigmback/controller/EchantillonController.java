@@ -1,8 +1,6 @@
 package com.example.sigmback.controller;
 
-import com.example.sigmback.model.Bordereau;
 import com.example.sigmback.model.Echantillon;
-import com.example.sigmback.model.Geologie;
 import com.example.sigmback.service.EchantillonService;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +10,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/echantillon")
 public class EchantillonController {
 
@@ -87,9 +83,12 @@ public class EchantillonController {
         return echantillonService.addWithIdGeologie(id_geologie,echantillon);
     }
 
-    @PostMapping("/bordereau/{idBordereau}/report")
+
+    @PostMapping(value = "/bordereau/{idBordereau}/report",produces = "application/pdf")
     @ResponseBody
     public ResponseEntity<byte[]> getBorderauEchantillon(@RequestBody List<Echantillon> selectedEchantillons, @PathVariable Long idBordereau) throws IOException, JRException {
+
+
         File file = echantillonService.exportReport(selectedEchantillons,idBordereau);
         FileInputStream fis = new FileInputStream(file);
         byte[] buffer = new byte[8192];
@@ -99,10 +98,17 @@ public class EchantillonController {
             baos.write(buffer, 0, bytesRead);
         }
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.parseMediaType("application/pdf"));
-        headers.add("Content-Disposition", "inline; =" + file.getName());
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        //headers.add("Content-Disposition", "inline; =" + file.getName());
+        //headers.add("", "inline; =" + file.getName());
         ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
         fis.close();
         return response;
     }
+
+    /*@PostMapping("/bordereau/{idBordereau}/report")
+    @ResponseBody
+    public File generateReport(@RequestBody List<Echantillon> selectedEchantillons, @PathVariable Long idBordereau) throws FileNotFoundException, JRException, FileNotFoundException {
+        return echantillonService.exportReport(selectedEchantillons,idBordereau);
+    }*/
 }

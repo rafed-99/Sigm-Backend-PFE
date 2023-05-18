@@ -63,4 +63,10 @@ public class BordereauController {
 
         return bordereauService.retrieveOneBordereau(id_bordereau);
     }
+
+    @PutMapping("/updatebord")
+    public void modifyBordereaux(@RequestBody List<Bordereau> bordereau){
+        bordereauService.updateBordereau1(bordereau);
+
+    }
 }

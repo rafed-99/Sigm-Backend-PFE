@@ -85,4 +85,11 @@ public class BordereauService implements IBordereauService{
     public Bordereau retrieveOneBordereau(Long id_bordereau) {
         return iBordereauRepository.findById(id_bordereau).get();
     }
+
+    public void updateBordereau1(List<Bordereau> bordereau) {
+        for(Integer i = 0; i<bordereau.size();i++){
+            System.out.println(bordereau.get(i));
+            iBordereauRepository.save(bordereau.get(i));
+        }
+    }
 }

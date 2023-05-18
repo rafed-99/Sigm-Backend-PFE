@@ -10,11 +10,9 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -108,22 +106,25 @@ public class EchantillonService implements IEchantillonService{
 
         }
 
-        String path = "C:\\ReportSigm";
-        //String path = "C:\\ReportSigm\\bordereau.pdf";
+        //String path = "D:\\ReportSigm\\";
+
+        String path = "D:\\ReportSigm";
         //load file and compile it
         //File file = ResourceUtils.getFile("classpath:bordereaux.jrxml");
-        /*JasperReport jasperReport = JasperCompileManager.compileReport(getClass().getResourceAsStream("/reports/bordereau1.jrxml"));
+        JasperReport jasperReport = JasperCompileManager.compileReport(getClass().getResourceAsStream("/report/bordereau1.jrxml"));
+        //JasperReport jasperReport = JasperCompileManager.compileReport(getClass().getResourceAsStream("bordereau1.jrxml"));
+
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(echantillons1);
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("Dataset1", dataSource);
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-        JasperExportManager.exportReportToPdfFile(jasperPrint, path);
-        File bordereau1 = new File(path);
-        return bordereau1;*/
+        JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\bordereau.pdf");
+        return new File(path + "\\bordereau.pdf");
+
+
         //load file and compile it
 
-
-        File file = ResourceUtils.getFile("classpath:bordereau1.jrxml");
+        /*File file = ResourceUtils.getFile("classpath:bordereau1.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(echantillons);
         Map<String, Object> parameters = new HashMap<>();
@@ -131,6 +132,6 @@ public class EchantillonService implements IEchantillonService{
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
         JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\bordereau1.pdf");
 
-        return file;
+        return file;*/
     }
 }
