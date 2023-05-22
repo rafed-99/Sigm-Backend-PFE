@@ -1,8 +1,5 @@
 package com.example.sigmback.controller;
 
-import com.example.sigmback.model.Archive;
-import com.example.sigmback.model.Geologie;
-import com.example.sigmback.model.Gisement;
 import com.example.sigmback.model.Point;
 import com.example.sigmback.service.PointService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -90,7 +87,7 @@ public class PointController {
         response.setContentType("application/octet-stream");
 
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment;filename=courses.xls";
+        String headerValue = "attachment;filename=points.xls";
 
         response.setHeader(headerKey, headerValue);
 

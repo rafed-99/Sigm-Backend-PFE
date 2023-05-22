@@ -4,6 +4,11 @@ import com.example.sigmback.model.*;
 import com.example.sigmback.repository.ICoucheRepository;
 import com.example.sigmback.repository.IGeologieRepository;
 import com.example.sigmback.repository.IPointRepository;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -82,5 +87,45 @@ public class GeologieService implements IGeologieService{
         return iGeologieRepository.save(geologie);
     }
 
+    public void generateExcelGeologie(HttpServletResponse response) throws Exception {
+
+        List<Geologie> geologies = iGeologieRepository.findAll();
+
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("Courses Info");
+        HSSFRow row = sheet.createRow(0);
+
+        row.createCell(0).setCellValue("Layer");
+        row.createCell(1).setCellValue("Id Geology");
+        row.createCell(2).setCellValue("Depth From");
+        row.createCell(3).setCellValue("Depth To");
+        row.createCell(4).setCellValue("Volume");
+        row.createCell(5).setCellValue("Real Volume");
+        row.createCell(6).setCellValue("Lithological Description");
+
+
+
+        int dataRowIndex = 1;
+
+        for (Geologie geologie : geologies) {
+            HSSFRow dataRow = sheet.createRow(dataRowIndex);
+            //dataRow.createCell(0).setCellValue(geologie.getPoint().getHoleId());
+            dataRow.createCell(0).setCellValue(geologie.getCouche().getCoucheCode());
+            dataRow.createCell(1).setCellValue(geologie.getGeologieId());
+            dataRow.createCell(2).setCellValue(geologie.getDepthFrom());
+            dataRow.createCell(3).setCellValue(geologie.getDepthTo());
+            dataRow.createCell(4).setCellValue(geologie.getPuissance());
+            dataRow.createCell(5).setCellValue(geologie.getPuissanceReelle());
+            dataRow.createCell(6).setCellValue(geologie.getDescriptionLithologique());
+
+            dataRowIndex++;
+        }
+
+        ServletOutputStream ops = response.getOutputStream();
+        workbook.write(ops);
+        workbook.close();
+        ops.close();
+
+    }
 
 }

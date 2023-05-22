@@ -1,9 +1,8 @@
 package com.example.sigmback.controller;
 
-import com.example.sigmback.model.Echantillon;
 import com.example.sigmback.model.Geologie;
-import com.example.sigmback.model.Point;
 import com.example.sigmback.service.GeologieService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +16,6 @@ public class GeologieController {
     @Autowired
     GeologieService geologieService;
 
-    Float dF;
-    Float dTo;
 
     // http://localhost:8099/api/geologie/addgeologie
     @PostMapping("/addgeologie")
@@ -68,4 +65,19 @@ public class GeologieController {
         return geologieService.addwithaffectation(id_point,id_couche,geologie);
     }
 
+    // http://localhost:8099/api/geologie/exportexcelgeologie
+    @GetMapping("/exportexcelgeologie")
+    public void generateExcelReport(HttpServletResponse response) throws Exception{
+
+        response.setContentType("application/octet-stream");
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment;filename=geologies.xls";
+
+        response.setHeader(headerKey, headerValue);
+
+        geologieService.generateExcelGeologie(response);
+
+        response.flushBuffer();
+    }
 }
