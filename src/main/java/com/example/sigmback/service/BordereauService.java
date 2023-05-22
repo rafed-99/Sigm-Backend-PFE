@@ -1,6 +1,7 @@
 package com.example.sigmback.service;
 
 import com.example.sigmback.model.Bordereau;
+import com.example.sigmback.repository.IArchiveRepository;
 import com.example.sigmback.repository.IBordereauRepository;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -20,6 +21,8 @@ public class BordereauService implements IBordereauService{
     @Autowired
     IBordereauRepository iBordereauRepository;
 
+    @Autowired
+    IArchiveRepository iArchiveRepository;
 
     @Override
     public Bordereau addBordereau(Bordereau bordereau) throws JRException, FileNotFoundException {
@@ -91,5 +94,9 @@ public class BordereauService implements IBordereauService{
             System.out.println(bordereau.get(i));
             iBordereauRepository.save(bordereau.get(i));
         }
+    }
+
+    public List<Bordereau> retrieveBordereauByArchive(Long idArchive){
+        return iArchiveRepository.findById(idArchive).get().getBordereaux();
     }
 }

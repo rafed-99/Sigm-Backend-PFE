@@ -69,4 +69,10 @@ public class BordereauController {
         bordereauService.updateBordereau1(bordereau);
 
     }
+
+    //http://localhost:8099/api/bordereau/getbordereaubyarchive/{idArchive}
+    @GetMapping("/getbordereaubyarchive/{idArchive}")
+    public List<Bordereau> retrieveBordereausByArchive(@PathVariable("idArchive")Long idArchive){
+        return bordereauService.retrieveBordereauByArchive(idArchive);
+    }
 }
