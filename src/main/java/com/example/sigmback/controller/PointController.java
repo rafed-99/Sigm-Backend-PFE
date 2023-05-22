@@ -5,6 +5,7 @@ import com.example.sigmback.model.Geologie;
 import com.example.sigmback.model.Gisement;
 import com.example.sigmback.model.Point;
 import com.example.sigmback.service.PointService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,6 +81,22 @@ public class PointController {
 
         return pointService.addToArchive(id_gisement,id_archive);
 
+    }
+
+    // http://localhost:8099/api/point/exportexcelpoint
+    @GetMapping("/exportexcelpoint")
+    public void generateExcelReport(HttpServletResponse response) throws Exception{
+
+        response.setContentType("application/octet-stream");
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment;filename=courses.xls";
+
+        response.setHeader(headerKey, headerValue);
+
+        pointService.generateExcelPoint(response);
+
+        response.flushBuffer();
     }
 
 
