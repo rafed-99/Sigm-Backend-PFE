@@ -80,9 +80,9 @@ public class PointController {
 
     }
 
-    // http://localhost:8099/api/point/exportexcelpoint
-    @GetMapping("/exportexcelpoint")
-    public void generateExcelReport(HttpServletResponse response) throws Exception{
+    // http://localhost:8099/api/point/exportexcelpoint/{id_gisement}
+    @GetMapping("/exportexcelpoint/{id_gisement}")
+    public void generateExcelReport(HttpServletResponse response , @PathVariable("id_gisement") Long id_gisement) throws Exception{
 
         response.setContentType("application/octet-stream");
 
@@ -91,7 +91,7 @@ public class PointController {
 
         response.setHeader(headerKey, headerValue);
 
-        pointService.generateExcelPoint(response);
+        pointService.generateExcelPoint(response,id_gisement);
 
         response.flushBuffer();
     }

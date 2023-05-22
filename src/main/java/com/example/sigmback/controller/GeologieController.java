@@ -65,9 +65,9 @@ public class GeologieController {
         return geologieService.addwithaffectation(id_point,id_couche,geologie);
     }
 
-    // http://localhost:8099/api/geologie/exportexcelgeologie
-    @GetMapping("/exportexcelgeologie")
-    public void generateExcelReport(HttpServletResponse response) throws Exception{
+    // http://localhost:8099/api/geologie/exportexcelgeologie/{pointId}
+    @GetMapping("/exportexcelgeologie/{pointId}")
+    public void generateExcelReport(HttpServletResponse response, @PathVariable("pointId") Long pointId) throws Exception{
 
         response.setContentType("application/octet-stream");
 
@@ -76,7 +76,7 @@ public class GeologieController {
 
         response.setHeader(headerKey, headerValue);
 
-        geologieService.generateExcelGeologie(response);
+        geologieService.generateExcelGeologie(response,pointId);
 
         response.flushBuffer();
     }

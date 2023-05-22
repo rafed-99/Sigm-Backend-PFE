@@ -43,7 +43,7 @@ public class GisementController {
         return gisementService.retrieveGisement();
     }
 
-    // http://localhost:8099/api/gisement/showgisements/{id_gisement}
+    // http://localhost:8099/api/gisement/showgisement/{id_gisement}
     @GetMapping("/showgisement/{id_gisement}")
     public Gisement showOneGisement(@PathVariable("id_gisement") Long id_gisement){
 

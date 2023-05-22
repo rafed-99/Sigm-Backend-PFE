@@ -26,6 +26,8 @@ public class PointService implements IPointService{
     @Autowired
     IArchiveRepository iArchiveRepository;
 
+
+
     @Override
     public Point addPoint(Point point) {
 
@@ -79,9 +81,11 @@ public class PointService implements IPointService{
         return iPointRepository.save(point);
     }
 
-    public void generateExcelPoint(HttpServletResponse response) throws Exception {
+    public void generateExcelPoint(HttpServletResponse response , Long idGisement) throws Exception {
 
-        List<Point> points = iPointRepository.findAll();
+
+        List<Point> points = retrievePointsByGisement(idGisement);
+        //List<Point> points = iPointRepository.findAll();
 
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Courses Info");

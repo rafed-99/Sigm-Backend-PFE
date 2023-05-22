@@ -87,9 +87,10 @@ public class GeologieService implements IGeologieService{
         return iGeologieRepository.save(geologie);
     }
 
-    public void generateExcelGeologie(HttpServletResponse response) throws Exception {
+    public void generateExcelGeologie(HttpServletResponse response , Long pointId) throws Exception {
 
-        List<Geologie> geologies = iGeologieRepository.findAll();
+        List<Geologie> geologies = iPointRepository.findById(pointId).get().getGeologies();
+        //List<Geologie> geologies = iGeologieRepository.findAll();
 
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Courses Info");
