@@ -2,21 +2,24 @@ package com.example.sigmback.service;
 
 import com.example.sigmback.model.Bordereau;
 import com.example.sigmback.model.Echantillon;
+import com.example.sigmback.model.Element;
 import com.example.sigmback.model.Geologie;
 import com.example.sigmback.repository.IBordereauRepository;
 import com.example.sigmback.repository.IEchantillonRepository;
 import com.example.sigmback.repository.IGeologieRepository;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 @Service
@@ -135,4 +138,58 @@ public class EchantillonService implements IEchantillonService{
         return file;*/
     }
 
+    public void generateExcelElement(HttpServletResponse response , Long id_geologie) throws Exception {
+
+        List<Echantillon> echantillons = iGeologieRepository.findById(id_geologie).get().getEchantillons();
+        //List<Geologie> geologies = iGeologieRepository.findAll();
+
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("Layers");
+        HSSFRow row = sheet.createRow(0);
+
+        row.createCell(0).setCellValue("Id Sample");
+        row.createCell(1).setCellValue("Layer Code");
+        row.createCell(2).setCellValue("Depth From");
+        row.createCell(3).setCellValue("Depth To");
+        row.createCell(4).setCellValue("Real Volume");
+        row.createCell(5).setCellValue("Observation");
+        //row.createCell(6).setCellValue("Sample Status");
+
+        /*Integer j=0;
+        System.out.println(echantillons.size());
+        for(Integer i=1;i<echantillons.size();i++){
+            echantillons.get(i).getAnalyses().get(i).getElement().getElementCode();
+            System.out.println(echantillons.get(i).getAnalyses().get(i).getElement().getElementCode());
+            j++;
+        }
+        System.out.println(j);
+        for(Integer k=5;k<j;k++) {
+            for (Integer i = 1; i < echantillons.size(); i++) {
+                row.createCell(k).setCellValue(echantillons.get(i).getAnalyses().get(i).getElement().getElementCode().toString());
+            }
+        }*/
+
+
+        int dataRowIndex = 1;
+
+        for (Echantillon echantillon : echantillons) {
+            HSSFRow dataRow = sheet.createRow(dataRowIndex);
+            //dataRow.createCell(0).setCellValue(geologie.getPoint().getHoleId());
+            dataRow.createCell(0).setCellValue(echantillon.getEchantillonId());
+            dataRow.createCell(1).setCellValue(echantillon.getGeologie().getCouche().getCoucheCode());
+            dataRow.createCell(2).setCellValue(echantillon.getDepthFrom());
+            dataRow.createCell(3).setCellValue(echantillon.getDepthTo());
+            dataRow.createCell(4).setCellValue(echantillon.getPuissanceReelle());
+            dataRow.createCell(5).setCellValue(echantillon.getObservation());
+            //dataRow.createCell(6).setCellValue(echantillon.getEtatEchantillon().toString());
+
+            dataRowIndex++;
+        }
+
+        ServletOutputStream ops = response.getOutputStream();
+        workbook.write(ops);
+        workbook.close();
+        ops.close();
+
+    }
 }

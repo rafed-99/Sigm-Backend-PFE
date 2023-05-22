@@ -75,4 +75,20 @@ public class BordereauController {
     public List<Bordereau> retrieveBordereausByArchive(@PathVariable("idArchive")Long idArchive){
         return bordereauService.retrieveBordereauByArchive(idArchive);
     }
+
+    // http://localhost:8099/api/bordereau/exportexcelbordereau
+    @GetMapping("/exportexcelbordereau")
+    public void generateExcelReport(HttpServletResponse response) throws Exception{
+
+        response.setContentType("application/octet-stream");
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment;filename=receipts.xls";
+
+        response.setHeader(headerKey, headerValue);
+
+        bordereauService.generateExcelBordereau(response);
+
+        response.flushBuffer();
+    }
 }

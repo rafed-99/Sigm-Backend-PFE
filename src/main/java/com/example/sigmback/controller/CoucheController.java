@@ -2,6 +2,7 @@ package com.example.sigmback.controller;
 
 import com.example.sigmback.model.Couche;
 import com.example.sigmback.service.CoucheService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,5 +49,21 @@ public class CoucheController {
     public Couche showOneCouche(@PathVariable("id_couche") Long id_couche){
 
         return coucheService.retrieveOneCouche(id_couche);
+    }
+
+    // http://localhost:8099/api/couche/exportexcelcouche
+    @GetMapping("/exportexcelcouche")
+    public void generateExcelReport(HttpServletResponse response) throws Exception{
+
+        response.setContentType("application/octet-stream");
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment;filename=layers.xls";
+
+        response.setHeader(headerKey, headerValue);
+
+        coucheService.generateExcelCouche(response);
+
+        response.flushBuffer();
     }
 }

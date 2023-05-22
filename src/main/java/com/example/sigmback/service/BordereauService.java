@@ -1,10 +1,16 @@
 package com.example.sigmback.service;
 
 import com.example.sigmback.model.Bordereau;
+import com.example.sigmback.model.Couche;
 import com.example.sigmback.repository.IArchiveRepository;
 import com.example.sigmback.repository.IBordereauRepository;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
@@ -98,5 +104,43 @@ public class BordereauService implements IBordereauService{
 
     public List<Bordereau> retrieveBordereauByArchive(Long idArchive){
         return iArchiveRepository.findById(idArchive).get().getBordereaux();
+    }
+
+    public void generateExcelBordereau(HttpServletResponse response) throws Exception {
+
+        List<Bordereau> bordereaux = iBordereauRepository.findAll();
+        //List<Geologie> geologies = iGeologieRepository.findAll();
+
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("Layers");
+        HSSFRow row = sheet.createRow(0);
+
+        row.createCell(0).setCellValue("Id Receipt");
+        row.createCell(1).setCellValue("Receipt Code");
+        row.createCell(2).setCellValue("Receipt Date");
+        row.createCell(3).setCellValue("Asked Analysis");
+        row.createCell(4).setCellValue("Requirements");
+        row.createCell(5).setCellValue("Urgency");
+
+        int dataRowIndex = 1;
+
+        for (Bordereau bordereau : bordereaux) {
+            HSSFRow dataRow = sheet.createRow(dataRowIndex);
+            //dataRow.createCell(0).setCellValue(geologie.getPoint().getHoleId());
+            dataRow.createCell(0).setCellValue(bordereau.getBordereauId());
+            dataRow.createCell(1).setCellValue(bordereau.getBordereauCode());
+            dataRow.createCell(2).setCellValue(bordereau.getDateEnvoi());
+            dataRow.createCell(3).setCellValue(bordereau.getAnalyseDemande());
+            dataRow.createCell(4).setCellValue(bordereau.getExigences());
+            dataRow.createCell(5).setCellValue(bordereau.getUrgences().toString());
+
+            dataRowIndex++;
+        }
+
+        ServletOutputStream ops = response.getOutputStream();
+        workbook.write(ops);
+        workbook.close();
+        ops.close();
+
     }
 }

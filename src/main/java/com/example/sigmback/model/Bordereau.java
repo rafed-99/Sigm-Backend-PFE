@@ -39,7 +39,7 @@ public class Bordereau {
     @Column(name = "exigences",length = 50)
     private String exigences;
 
-    @Column(name = "urgences")
+    @Column(name = "urgences",columnDefinition = "varchar(255) default 'Normale'")
     @Enumerated(EnumType.STRING)
     private Urgences urgences;
 

@@ -2,6 +2,7 @@ package com.example.sigmback.controller;
 
 import com.example.sigmback.model.Echantillon;
 import com.example.sigmback.service.EchantillonService;
+import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -110,5 +111,21 @@ public class EchantillonController {
     @ResponseBody
     public File generateReport(@RequestBody List<Echantillon> selectedEchantillons, @PathVariable Long idBordereau) throws FileNotFoundException, JRException, FileNotFoundException {
         return echantillonService.exportReport(selectedEchantillons,idBordereau);
+    }*/
+
+    // http://localhost:8099/api/echantillon/exportexcelechantillon/{id_geologie}
+    /*@GetMapping("/exportexcelechantillon/{id_geologie}")
+    public void generateExcelReport(HttpServletResponse response ,@PathVariable("id_geologie") Long id_geologie ) throws Exception{
+
+        response.setContentType("application/octet-stream");
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment;filename=layers.xls";
+
+        response.setHeader(headerKey, headerValue);
+
+        echantillonService.generateExcelElement(response,id_geologie);
+
+        response.flushBuffer();
     }*/
 }

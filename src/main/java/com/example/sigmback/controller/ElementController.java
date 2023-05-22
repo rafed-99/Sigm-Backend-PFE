@@ -2,6 +2,7 @@ package com.example.sigmback.controller;
 
 import com.example.sigmback.model.Element;
 import com.example.sigmback.service.ElementService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,5 +49,21 @@ public class ElementController {
     public Element showOneElement(@PathVariable("id_element") Long id_element){
 
         return elementService.retrieveOneElement(id_element);
+    }
+
+    // http://localhost:8099/api/element/exportexcelelement
+    @GetMapping("/exportexcelelement")
+    public void generateExcelReport(HttpServletResponse response) throws Exception{
+
+        response.setContentType("application/octet-stream");
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment;filename=elements.xls";
+
+        response.setHeader(headerKey, headerValue);
+
+        elementService.generateExcelElement(response);
+
+        response.flushBuffer();
     }
 }
