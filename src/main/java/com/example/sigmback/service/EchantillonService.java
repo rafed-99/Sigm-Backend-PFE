@@ -1,12 +1,7 @@
 package com.example.sigmback.service;
 
-import com.example.sigmback.model.Bordereau;
-import com.example.sigmback.model.Echantillon;
-import com.example.sigmback.model.Element;
-import com.example.sigmback.model.Geologie;
-import com.example.sigmback.repository.IBordereauRepository;
-import com.example.sigmback.repository.IEchantillonRepository;
-import com.example.sigmback.repository.IGeologieRepository;
+import com.example.sigmback.model.*;
+import com.example.sigmback.repository.*;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.*;
@@ -14,6 +9,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.RichTextString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +32,14 @@ public class EchantillonService implements IEchantillonService{
 
     @Autowired
     IBordereauRepository iBordereauRepository;
+
+    @Autowired
+    IElementRepository iElementRepository;
+
+    @Autowired
+    IAnalyseRepository iAnalyseRepository;
+
+    private List<Element> elements;
 
     @Override
     public Echantillon addEchantillon(Echantillon echantillon) {
@@ -138,9 +142,11 @@ public class EchantillonService implements IEchantillonService{
         return file;*/
     }
 
-    public void generateExcelElement(HttpServletResponse response , Long id_geologie) throws Exception {
+    public void generateExcelElement(HttpServletResponse response , Long id_point) throws Exception {
 
-        List<Echantillon> echantillons = iGeologieRepository.findById(id_geologie).get().getEchantillons();
+        List<Echantillon> echantillons = retrieveEchantillonByPoint(id_point);
+        System.out.println(echantillons);
+        elements = iElementRepository.findAll();
         //List<Geologie> geologies = iGeologieRepository.findAll();
 
         HSSFWorkbook workbook = new HSSFWorkbook();
@@ -155,22 +161,26 @@ public class EchantillonService implements IEchantillonService{
         row.createCell(5).setCellValue("Observation");
         //row.createCell(6).setCellValue("Sample Status");
 
-        /*Integer j=0;
-        System.out.println(echantillons.size());
-        for(Integer i=1;i<echantillons.size();i++){
-            echantillons.get(i).getAnalyses().get(i).getElement().getElementCode();
-            System.out.println(echantillons.get(i).getAnalyses().get(i).getElement().getElementCode());
-            j++;
-        }
-        System.out.println(j);
-        for(Integer k=5;k<j;k++) {
-            for (Integer i = 1; i < echantillons.size(); i++) {
-                row.createCell(k).setCellValue(echantillons.get(i).getAnalyses().get(i).getElement().getElementCode().toString());
+        Integer a = elements.size();
+        System.out.println("elements lenght "+a);
+        Integer j=6;
+
+            for(Integer i=0;i<a;i++){
+                /*System.out.println("J antering the loop "+j);
+                System.out.println("code element "+elements.get(i).getElementCode());*/
+                //System.out.println("J+I "+(j+i));
+                row.createCell(j).setCellValue(elements.get(i).getElementCode());
+                //System.out.println("j before adding "+j);
+                j++;
+                //System.out.println("j after adding  "+j);
             }
-        }*/
+
+
+        Integer k=6;
 
 
         int dataRowIndex = 1;
+
 
         for (Echantillon echantillon : echantillons) {
             HSSFRow dataRow = sheet.createRow(dataRowIndex);
@@ -179,9 +189,67 @@ public class EchantillonService implements IEchantillonService{
             dataRow.createCell(1).setCellValue(echantillon.getGeologie().getCouche().getCoucheCode());
             dataRow.createCell(2).setCellValue(echantillon.getDepthFrom());
             dataRow.createCell(3).setCellValue(echantillon.getDepthTo());
-            dataRow.createCell(4).setCellValue(echantillon.getPuissanceReelle());
+            if(echantillon.getPuissanceReelle()==null){
+                dataRow.createCell(4).setCellValue("");
+            }else{
+                dataRow.createCell(4).setCellValue(echantillon.getPuissanceReelle());
+            }
             dataRow.createCell(5).setCellValue(echantillon.getObservation());
             //dataRow.createCell(6).setCellValue(echantillon.getEtatEchantillon().toString());
+
+
+            System.out.println("k "+k);
+            System.out.println("a "+a);
+
+
+
+
+                /*for(Integer i=0;i<a;i++){
+
+                    List<Analyses> analyses = iEchantillonRepository.findById(echantillon.getEchantillonId()).get().getAnalyses();
+                    for(Integer z=0;z<analyses.size();z++) {
+
+                        if (analyses.get(z) != null) {
+
+                            String condition = sheet.getRow(0).getCell(k).toString();
+
+                            if ((analyses.get(z).getElement()).getElementCode() == condition) {
+                                System.out.println(analyses.get(z).getValeurAnalyse());
+                                dataRow.createCell(k+i).setCellValue(analyses.get(z).getValeurAnalyse().toString());
+
+                                k++;
+
+                            } else {
+                                dataRow.createCell(k +i).setCellValue("");
+                                System.out.println("****** " + (k+i));
+                                //k++;
+
+                            }
+                        } else {
+                            dataRow.createCell(k+i).setCellValue("");
+                            System.out.println("+++++++ " + (k+i));
+                            //k++;
+
+                        }
+                    }
+
+                }*/
+
+            for(Integer i=0;i<a;i++){
+                dataRow.createCell(k+i).setCellValue("");
+            }
+
+            List<Analyses> analyses = iEchantillonRepository.findById(echantillon.getEchantillonId()).get().getAnalyses();
+
+            for(Integer i=0; i<analyses.size();i++){
+                String element= analyses.get(i).getElement().getElementCode();
+                Integer index=getIndexfromElement(element)+k;
+                dataRow.getCell(index).setCellValue(analyses.get(i).getValeurAnalyse().toString());
+            }
+
+
+
+
 
             dataRowIndex++;
         }
@@ -191,5 +259,15 @@ public class EchantillonService implements IEchantillonService{
         workbook.close();
         ops.close();
 
+    }
+
+    Integer getIndexfromElement(String elementCode){
+        Integer index = 0;
+        for(Integer i=0; i<elements.size();i++){
+          if(elements.get(i).getElementCode()==elementCode){
+              index = i;
+          }
+        }
+        return index;
     }
 }

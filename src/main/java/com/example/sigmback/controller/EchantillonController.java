@@ -114,18 +114,18 @@ public class EchantillonController {
     }*/
 
     // http://localhost:8099/api/echantillon/exportexcelechantillon/{id_geologie}
-    /*@GetMapping("/exportexcelechantillon/{id_geologie}")
+    @GetMapping("/exportexcelechantillon/{id_geologie}")
     public void generateExcelReport(HttpServletResponse response ,@PathVariable("id_geologie") Long id_geologie ) throws Exception{
 
         response.setContentType("application/octet-stream");
 
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment;filename=layers.xls";
+        String headerValue = "attachment;filename=samples.xls";
 
         response.setHeader(headerKey, headerValue);
 
         echantillonService.generateExcelElement(response,id_geologie);
 
         response.flushBuffer();
-    }*/
+    }
 }

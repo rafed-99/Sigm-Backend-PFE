@@ -1,19 +1,16 @@
 package com.example.sigmback.service;
 
 import com.example.sigmback.model.Bordereau;
-import com.example.sigmback.model.Couche;
 import com.example.sigmback.repository.IArchiveRepository;
 import com.example.sigmback.repository.IBordereauRepository;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -129,7 +126,7 @@ public class BordereauService implements IBordereauService{
             //dataRow.createCell(0).setCellValue(geologie.getPoint().getHoleId());
             dataRow.createCell(0).setCellValue(bordereau.getBordereauId());
             dataRow.createCell(1).setCellValue(bordereau.getBordereauCode());
-            dataRow.createCell(2).setCellValue(bordereau.getDateEnvoi());
+            dataRow.createCell(2).setCellValue(bordereau.getDateEnvoi().toString());
             dataRow.createCell(3).setCellValue(bordereau.getAnalyseDemande());
             dataRow.createCell(4).setCellValue(bordereau.getExigences());
             dataRow.createCell(5).setCellValue(bordereau.getUrgences().toString());
