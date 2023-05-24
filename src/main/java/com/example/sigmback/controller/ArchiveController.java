@@ -2,6 +2,7 @@ package com.example.sigmback.controller;
 
 import com.example.sigmback.model.Archive;
 import com.example.sigmback.service.ArchiveService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,5 +49,37 @@ public class ArchiveController {
     public Archive showOneArchive(@PathVariable("id_archive") Long id_archive){
 
         return archiveService.retrieveOneArchive(id_archive);
+    }
+
+    // http://localhost:8099/api/archive/exportexcelarchivepoint
+    @GetMapping("/exportexcelarchivepoint")
+    public void generateExcelReportArchivePoint(HttpServletResponse response) throws Exception{
+
+        response.setContentType("application/octet-stream");
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment;filename=archivePoints.xls";
+
+        response.setHeader(headerKey, headerValue);
+
+        archiveService.generateExcelArchivePoint(response);
+
+        response.flushBuffer();
+    }
+
+    // http://localhost:8099/api/archive/exportexcelarchivebordereau
+    @GetMapping("/exportexcelarchivebordereau")
+    public void generateExcelReportArchiveBordereau(HttpServletResponse response) throws Exception{
+
+        response.setContentType("application/octet-stream");
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment;filename=archiveReceipts.xls";
+
+        response.setHeader(headerKey, headerValue);
+
+        archiveService.generateExcelArchiveBordereau(response);
+
+        response.flushBuffer();
     }
 }

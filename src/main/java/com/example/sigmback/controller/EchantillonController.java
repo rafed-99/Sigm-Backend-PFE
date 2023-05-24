@@ -128,4 +128,27 @@ public class EchantillonController {
 
         response.flushBuffer();
     }
+
+    //http://localhost:8099/api/echantillon/bordereau/report/{idBordereau}
+    @GetMapping(value = "/bordereau/report/{idBordereau}",produces = "application/pdf")
+    @ResponseBody
+    public ResponseEntity<byte[]> getBorderauEchantillonById(@PathVariable Long idBordereau) throws IOException, JRException {
+
+
+        File file = echantillonService.exportExistingReport(idBordereau);
+        FileInputStream fis = new FileInputStream(file);
+        byte[] buffer = new byte[8192];
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        int bytesRead;
+        while ((bytesRead = fis.read(buffer)) != -1) {
+            baos.write(buffer, 0, bytesRead);
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        //headers.add("Content-Disposition", "inline; =" + file.getName());
+        //headers.add("", "inline; =" + file.getName());
+        ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.OK);
+        fis.close();
+        return response;
+    }
 }

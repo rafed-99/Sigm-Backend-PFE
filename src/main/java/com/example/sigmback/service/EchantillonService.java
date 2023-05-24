@@ -98,6 +98,7 @@ public class EchantillonService implements IEchantillonService{
     public File exportReport(List<Echantillon> echantillons , Long idBordereau) throws FileNotFoundException, JRException {
 
         Bordereau bordereau = iBordereauRepository.findById(idBordereau).orElse(null);
+
         System.out.println("bordereau : "+bordereau.getBordereauId());
 
         List<Echantillon> echantillons1 = new ArrayList<>();
@@ -269,5 +270,42 @@ public class EchantillonService implements IEchantillonService{
           }
         }
         return index;
+    }
+
+    public File exportExistingReport(Long idBordereau) throws FileNotFoundException, JRException {
+
+        Bordereau bordereau = iBordereauRepository.findById(idBordereau).orElse(null);
+
+
+        System.out.println("bordereau : "+bordereau.getBordereauId());
+
+
+        //String path = "D:\\ReportSigm\\";
+
+        String path = "D:\\ReportSigm";
+        //load file and compile it
+        //File file = ResourceUtils.getFile("classpath:bordereaux.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(getClass().getResourceAsStream("/report/bordereau1.jrxml"));
+        //JasperReport jasperReport = JasperCompileManager.compileReport(getClass().getResourceAsStream("bordereau1.jrxml"));
+
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(bordereau.getEchantillons());
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("Dataset1", dataSource);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\bordereau.pdf");
+        return new File(path + "\\bordereau.pdf");
+
+
+        //load file and compile it
+
+        /*File file = ResourceUtils.getFile("classpath:bordereau1.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(echantillons);
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("Dataset1", dataSource);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\bordereau1.pdf");
+
+        return file;*/
     }
 }
