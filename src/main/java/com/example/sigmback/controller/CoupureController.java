@@ -15,27 +15,6 @@ public class CoupureController {
     @Autowired
     CoupureService coupureService;
 
-    // http://localhost:8099/api/coupure/addcoupure
-    @PostMapping("/addcoupure")
-    public Coupure saveCoupure(@RequestBody Coupure coupure){
-
-        return coupureService.addCoupure(coupure);
-    }
-
-    // http://localhost:8099/api/coupure/updatecoupure
-    @PutMapping("/updatecoupure")
-    public Coupure modifyCoupure(@RequestBody Coupure coupure){
-
-        return coupureService.updateCoupure(coupure);
-    }
-
-    // http://localhost:8099/api/coupure/deletecoupure/{id_coupure}
-    @DeleteMapping("/deletecoupure/{id_coupure}")
-    public void eraseCoupure(@PathVariable("id_coupure") Long id_coupure){
-
-        coupureService.deleteCoupure(id_coupure);
-    }
-
     // http://localhost:8099/api/coupure/showcoupures
     @GetMapping("/showcoupures")
     public List<Coupure> showCoupures(){

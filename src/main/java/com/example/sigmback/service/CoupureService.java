@@ -13,25 +13,7 @@ public class CoupureService implements ICoupureService{
     @Autowired
     ICoupureRepository iCoupureRepository;
 
-    @Override
-    public Coupure addCoupure(Coupure coupure) {
-
-        return iCoupureRepository.save(coupure);
-    }
-
-    @Override
-    public Coupure updateCoupure(Coupure coupure) {
-
-        return iCoupureRepository.save(coupure);
-    }
-
-    @Override
-    public void deleteCoupure(Long id_coupure) {
-
-        iCoupureRepository.deleteById(id_coupure);
-    }
-
-    @Override
+        @Override
     public List<Coupure> retrieveCoupures() {
 
         return (List<Coupure>)iCoupureRepository.findAll();

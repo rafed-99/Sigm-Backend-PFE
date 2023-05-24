@@ -24,8 +24,6 @@ public class Coupure {
     @Column(name = "coupure_Libelle",length = 50)
     private String coupureLibelle;
 
-    @Column(name = "masse")
-    private Integer masse;
 
     @OneToMany(mappedBy = "coupure")
     @JsonIgnore
