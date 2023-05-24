@@ -2,6 +2,7 @@ package com.example.sigmback.controller;
 
 import com.example.sigmback.model.Gisement;
 import com.example.sigmback.service.GisementService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -84,4 +85,20 @@ public class GisementController {
 
         return gisementService.searchByLibelle(libelle);
     }*/
+
+    // http://localhost:8099/api/gisement/exportexcelgisements
+    @GetMapping("/exportexcelgisements")
+    public void generateExcelReport(HttpServletResponse response) throws Exception{
+
+        response.setContentType("application/octet-stream");
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment;filename=gisements.xls";
+
+        response.setHeader(headerKey, headerValue);
+
+        gisementService.generateExcelGisement(response);
+
+        response.flushBuffer();
+    }
 }

@@ -1,9 +1,15 @@
 package com.example.sigmback.service;
 
+import com.example.sigmback.model.Couche;
 import com.example.sigmback.model.Gisement;
 import com.example.sigmback.model.Point;
 import com.example.sigmback.repository.IGisementRepository;
 import com.example.sigmback.repository.IPointRepository;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,4 +85,38 @@ public class GisementService implements IGisementService{
         }
         return iGisementRepository.findAll();
     }*/
+
+    public void generateExcelGisement(HttpServletResponse response) throws Exception {
+
+        List<Gisement> gisements = iGisementRepository.findAll();
+        //List<Geologie> geologies = iGeologieRepository.findAll();
+
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        HSSFSheet sheet = workbook.createSheet("Layers");
+        HSSFRow row = sheet.createRow(0);
+
+        row.createCell(0).setCellValue("Id FIeld");
+        row.createCell(1).setCellValue("Field Code");
+        row.createCell(2).setCellValue("Field Name");
+        row.createCell(3).setCellValue("Field Sector");
+
+        int dataRowIndex = 1;
+
+        for (Gisement gisement : gisements) {
+            HSSFRow dataRow = sheet.createRow(dataRowIndex);
+            //dataRow.createCell(0).setCellValue(geologie.getPoint().getHoleId());
+            dataRow.createCell(0).setCellValue(gisement.getGisementId());
+            dataRow.createCell(1).setCellValue(gisement.getGisementCode());
+            dataRow.createCell(2).setCellValue(gisement.getGisementLibelle());
+            dataRow.createCell(3).setCellValue(gisement.getSecteur().toString());
+
+            dataRowIndex++;
+        }
+
+        ServletOutputStream ops = response.getOutputStream();
+        workbook.write(ops);
+        workbook.close();
+        ops.close();
+
+    }
 }
