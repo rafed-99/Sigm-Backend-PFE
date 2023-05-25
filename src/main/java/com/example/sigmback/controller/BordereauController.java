@@ -91,4 +91,9 @@ public class BordereauController {
 
         response.flushBuffer();
     }
+
+    @PutMapping("/updateinprogress")
+    public void statusInProgress(@RequestBody Bordereau bordereau){
+        bordereauService.statusToInProgress(bordereau);
+    }
 }

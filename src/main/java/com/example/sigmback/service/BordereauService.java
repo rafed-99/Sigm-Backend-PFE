@@ -1,8 +1,11 @@
 package com.example.sigmback.service;
 
 import com.example.sigmback.model.Bordereau;
+import com.example.sigmback.model.Echantillon;
+import com.example.sigmback.model.EtatsBordereaux;
 import com.example.sigmback.repository.IArchiveRepository;
 import com.example.sigmback.repository.IBordereauRepository;
+import com.example.sigmback.repository.IEchantillonRepository;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.*;
@@ -27,10 +30,14 @@ public class BordereauService implements IBordereauService{
     @Autowired
     IArchiveRepository iArchiveRepository;
 
+    @Autowired
+    IEchantillonService iEchantillonService;
+
     @Override
     public Bordereau addBordereau(Bordereau bordereau) throws JRException, FileNotFoundException {
 
         iBordereauRepository.save(bordereau);
+        bordereau.setEtatsBordereaux(EtatsBordereaux.En_Attente);
         Date dE = bordereau.getDateEnvoi();
         DateFormat dateFormat = new SimpleDateFormat("yyyy");
         String strDate = dateFormat.format(dE);
@@ -139,5 +146,11 @@ public class BordereauService implements IBordereauService{
         workbook.close();
         ops.close();
 
+    }
+
+    public Bordereau statusToInProgress(Bordereau bordereau){
+
+        bordereau.setEtatsBordereaux(EtatsBordereaux.En_Cours);
+        return  iBordereauRepository.save(bordereau);
     }
 }

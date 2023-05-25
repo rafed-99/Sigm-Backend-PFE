@@ -151,4 +151,10 @@ public class EchantillonController {
         fis.close();
         return response;
     }
+
+    // http://localhost:8099/api/echantillon/recevoirechantillon
+    @PutMapping("/recevoirechantillon")
+    public Echantillon recevoirEchantillon(@RequestBody Echantillon echantillon){
+        return echantillonService.recevoirEchantillon(echantillon);
+    }
 }

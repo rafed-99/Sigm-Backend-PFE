@@ -41,9 +41,11 @@ public class EchantillonService implements IEchantillonService{
 
     private List<Element> elements;
 
+
+
     @Override
     public Echantillon addEchantillon(Echantillon echantillon) {
-
+        echantillon.setEtatEchantillon(EtatEchantillon.Nouvelle);
         return iEchantillonRepository.save(echantillon);
     }
 
@@ -105,9 +107,11 @@ public class EchantillonService implements IEchantillonService{
 
 
 
+
         for(Integer i=0 ; i<echantillons.size();i++){
             System.out.println(i);
             echantillons.get(i).setBordereau(bordereau);
+            echantillons.get(i).setEtatEchantillon(EtatEchantillon.Envoye);
             iEchantillonRepository.save(echantillons.get(i));
             echantillons1.add(echantillons.get(i));
             System.out.println("echantillons.get(i) : "+echantillons.get(i).getBordereau().getBordereauId());
@@ -307,5 +311,9 @@ public class EchantillonService implements IEchantillonService{
         JasperExportManager.exportReportToPdfFile(jasperPrint, path + "\\bordereau1.pdf");
 
         return file;*/
+    }
+    public Echantillon recevoirEchantillon(Echantillon echantillon) {
+        echantillon.setEtatEchantillon(EtatEchantillon.Recu);
+        return iEchantillonRepository.save(echantillon);
     }
 }

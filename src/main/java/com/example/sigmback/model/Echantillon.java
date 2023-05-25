@@ -54,7 +54,7 @@ public class Echantillon {
 
     //@Column(name = "etat_Echantillons",columnDefinition = "varchar(255) default 'Nouveau' ")
 
-    @Column(name = "etat_Echantillon",columnDefinition = "varchar(255) default 'Nouvelle' ")
+
     @Enumerated(EnumType.STRING)
     private EtatEchantillon etatEchantillon;
 

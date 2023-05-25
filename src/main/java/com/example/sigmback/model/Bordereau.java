@@ -43,7 +43,7 @@ public class Bordereau {
     @Enumerated(EnumType.STRING)
     private Urgences urgences;
 
-    @Column(name = "etats_Bordereaux",columnDefinition = "varchar(255) default 'A_verifier'")
+    @Column(columnDefinition = "varchar(255) default 'En_Attente'")
     @Enumerated(EnumType.STRING)
     private EtatsBordereaux etatsBordereaux;
 
