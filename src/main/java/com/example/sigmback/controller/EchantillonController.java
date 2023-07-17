@@ -9,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
@@ -18,6 +19,7 @@ import java.util.List;
 @RestController
 //@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/echantillon")
+@PreAuthorize("hasAnyRole('CENTRE_ADMIN','CENTRE_USER','CENTRE_CONFIRM','GEOLOGIE_ADMIN','GEOLOGIE_USER','GEOLOGIE_CONSULT')")
 public class EchantillonController {
 
     @Autowired
@@ -25,6 +27,7 @@ public class EchantillonController {
 
     // http://localhost:8099/api/echantillon/addechantillon
     @PostMapping("/addechantillon")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:create','geologieuser:create')")
     public Echantillon saveEchantillon(@RequestBody Echantillon echantillon){
 
         return echantillonService.addEchantillon(echantillon);
@@ -32,6 +35,7 @@ public class EchantillonController {
 
     // http://localhost:8099/api/echantillon/updateechantillon
     @PutMapping("/updateechantillon")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:update','geologieuser:update')")
     public Echantillon modifyEchantillon(@RequestBody Echantillon echantillon){
 
         return echantillonService.updateEchantillon(echantillon);
@@ -39,6 +43,7 @@ public class EchantillonController {
 
     // http://localhost:8099/api/echantillon/deleteechantillon/{id_echantillon}
     @DeleteMapping("/deleteechantillon/{id_echantillon}")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:delete')")
     public void eraseEchantillon(@PathVariable("id_echantillon") Long id_echantillon){
 
         echantillonService.deleteEchantillon(id_echantillon);
@@ -46,6 +51,7 @@ public class EchantillonController {
 
     // http://localhost:8099/api/echantillon/showechantillons
     @GetMapping("/showechantillons")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read','geologieadmin:read','geologieuser:read','geologieconsult:read')")
     public List<Echantillon> showEchantillons(){
 
         return echantillonService.retrieveEchantillons();
@@ -53,6 +59,7 @@ public class EchantillonController {
 
     // http://localhost:8099/api/echantillon/showechantillon/{id_echantillon}
     @GetMapping("/showechantillon/{id_echantillon}")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read','geologieadmin:read','geologieuser:read','geologieconsult:read')")
     public Echantillon showOneEchantillon(@PathVariable("id_echantillon") Long id_echantillon){
 
         return echantillonService.retrieveOneEchantillon(id_echantillon);
@@ -60,18 +67,21 @@ public class EchantillonController {
 
     // http://localhost:8099/api/echantillon/showechantillonsbypoint/{id_point}
     @GetMapping("/showechantillonsbypoint/{id_point}")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read','geologieadmin:read','geologieuser:read','geologieconsult:read')")
     public List<Echantillon> show(@PathVariable("id_point") Long id_point){
         return echantillonService.retrieveEchantillonByPoint(id_point);
     }
 
     // http://localhost:8099/api/echantillon/showechantillonsbygeologie/{id_geologie}
     @GetMapping("/showechantillonsbygeologie/{id_geologie}")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read','geologieadmin:read','geologieuser:read','geologieconsult:read')")
     public List<Echantillon> showEchantillonsByGeologie(@PathVariable("id_geologie") Long id_geologie){
         return echantillonService.retrieveEchantillonsByGeologie(id_geologie);
     }
 
     // http://localhost:8099/api/echantillon/showechantillonbybordereau/{id_bordereau}
     @GetMapping("/showechantillonbybordereau/{id_bordereau}")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read','geologieadmin:read','geologieuser:read','geologieconsult:read')")
     public List<Echantillon> showEchantillonByBordereau(@PathVariable("id_bordereau") Long id_bordereau){
 
         return echantillonService.retrieveEchantillonByBordereau(id_bordereau);
@@ -79,6 +89,8 @@ public class EchantillonController {
 
     // http://localhost:8099/api/echantillon/addaffect/{id_geologie}
     @PostMapping("/addaffect/{id_geologie}")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:create','geologieuser:create')")
+
     public Echantillon addAffect(@RequestBody Echantillon echantillon, @PathVariable(name = "id_geologie")  Long id_geologie){
 
         return echantillonService.addWithIdGeologie(id_geologie,echantillon);
@@ -115,6 +127,7 @@ public class EchantillonController {
 
     // http://localhost:8099/api/echantillon/exportexcelechantillon/{id_geologie}
     @GetMapping("/exportexcelechantillon/{id_geologie}")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
     public void generateExcelReport(HttpServletResponse response ,@PathVariable("id_geologie") Long id_geologie ) throws Exception{
 
         response.setContentType("application/octet-stream");
@@ -132,6 +145,7 @@ public class EchantillonController {
     //http://localhost:8099/api/echantillon/bordereau/report/{idBordereau}
     @GetMapping(value = "/bordereau/report/{idBordereau}",produces = "application/pdf")
     @ResponseBody
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
     public ResponseEntity<byte[]> getBorderauEchantillonById(@PathVariable Long idBordereau) throws IOException, JRException {
 
 
@@ -152,9 +166,5 @@ public class EchantillonController {
         return response;
     }
 
-    // http://localhost:8099/api/echantillon/recevoirechantillon
-    @PutMapping("/recevoirechantillon")
-    public Echantillon recevoirEchantillon(@RequestBody Echantillon echantillon){
-        return echantillonService.recevoirEchantillon(echantillon);
-    }
+
 }

@@ -33,6 +33,9 @@ public class BordereauService implements IBordereauService{
     @Autowired
     IEchantillonService iEchantillonService;
 
+    @Autowired
+    IEchantillonRepository iEchantillonRepository;
+
     @Override
     public Bordereau addBordereau(Bordereau bordereau) throws JRException, FileNotFoundException {
 
@@ -110,6 +113,10 @@ public class BordereauService implements IBordereauService{
         return iArchiveRepository.findById(idArchive).get().getBordereaux();
     }
 
+    public Bordereau retrieveBordereauByEchantillon(Long idEchantillon){
+        return iEchantillonRepository.findById(idEchantillon).get().getBordereau();
+    }
+
     public void generateExcelBordereau(HttpServletResponse response) throws Exception {
 
         List<Bordereau> bordereaux = iBordereauRepository.findAll();
@@ -148,9 +155,5 @@ public class BordereauService implements IBordereauService{
 
     }
 
-    public Bordereau statusToInProgress(Bordereau bordereau){
 
-        bordereau.setEtatsBordereaux(EtatsBordereaux.En_Cours);
-        return  iBordereauRepository.save(bordereau);
-    }
 }

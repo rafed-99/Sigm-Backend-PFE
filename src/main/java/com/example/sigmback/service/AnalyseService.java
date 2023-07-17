@@ -2,6 +2,7 @@ package com.example.sigmback.service;
 
 
 import com.example.sigmback.model.Analyses;
+import com.example.sigmback.model.EtatAnalyse;
 import com.example.sigmback.repository.IAnalyseRepository;
 import com.example.sigmback.repository.IEchantillonRepository;
 import com.example.sigmback.repository.IElementRepository;
@@ -24,6 +25,7 @@ public class AnalyseService implements IAnalyseService{
 
     @Override
     public Analyses addAnalyse(Analyses analyse) {
+        analyse.setEtatAnalyse(EtatAnalyse.Nouvelle);
         return iAnalyseRepository.save(analyse);
     }
 

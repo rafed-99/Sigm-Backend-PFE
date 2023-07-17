@@ -1,5 +1,7 @@
 package com.example.sigmback.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public enum EtatAnalyse {
-    Nouvelle, Confirme, Valide
+    @JsonProperty("New")Nouvelle, @JsonProperty("Confirmed")Confirme, @JsonProperty("Valid")Valide
 }

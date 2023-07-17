@@ -312,8 +312,5 @@ public class EchantillonService implements IEchantillonService{
 
         return file;*/
     }
-    public Echantillon recevoirEchantillon(Echantillon echantillon) {
-        echantillon.setEtatEchantillon(EtatEchantillon.Recu);
-        return iEchantillonRepository.save(echantillon);
-    }
+
 }

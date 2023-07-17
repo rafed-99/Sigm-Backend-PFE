@@ -92,8 +92,9 @@ public class BordereauController {
         response.flushBuffer();
     }
 
-    @PutMapping("/updateinprogress")
-    public void statusInProgress(@RequestBody Bordereau bordereau){
-        bordereauService.statusToInProgress(bordereau);
+    @GetMapping("/retrieveBordereauByEchantillon/{idEchantillon}")
+    public Bordereau retrieveByEchantillon(@PathVariable("idEchantillon")Long idEchantillon){
+        return bordereauService.retrieveBordereauByEchantillon(idEchantillon);
     }
+
 }
