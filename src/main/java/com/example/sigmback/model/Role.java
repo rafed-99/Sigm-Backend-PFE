@@ -1,5 +1,7 @@
 package com.example.sigmback.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,13 +16,17 @@ import static com.example.sigmback.model.Permission.*;
 @RequiredArgsConstructor
 public enum Role {
 
+
   USER(Collections.emptySet()),
 //    USER(
 //            Set.of(
 //                    USER_READ
 //            )
 //),
+
+
   ADMIN(
+
           Set.of(
                   ADMIN_READ,
                   ADMIN_UPDATE,
@@ -28,7 +34,8 @@ public enum Role {
                   ADMIN_CREATE
           )
   ),
-  GEOLOGIE_ADMIN(
+
+    GEOLOGIE_ADMIN(
           Set.of(
                   GEOLOGIE_ADMIN_READ,
                   GEOLOGIE_ADMIN_UPDATE,
@@ -36,6 +43,7 @@ public enum Role {
                   GEOLOGIE_ADMIN_CREATE
           )
   ),
+
   GEOLOGIE_USER(
           Set.of(
                   GEOLOGIE_USER_READ,
@@ -43,12 +51,14 @@ public enum Role {
                   GEOLOGIE_USER_CREATE
           )
   ),
+
   GEOLOGIE_CONSULT(
           Set.of(
                   GEOLOGIE_CONSULT_READ
 
           )
   ),
+
   CENTRE_ADMIN(
           Set.of(
                   CENTRE_ADMIN_READ,
@@ -57,6 +67,7 @@ public enum Role {
                   CENTRE_ADMIN_CREATE
           )
   ),
+
   CENTRE_CONFIRM(
           Set.of(
                   CENTRE_CONFIRM_READ,
@@ -65,6 +76,7 @@ public enum Role {
                   CENTRE_CONFIRM_CREATE
           )
   ),
+
   CENTRE_USER(
           Set.of(
                   CENTRE_USER_READ,
@@ -78,8 +90,11 @@ public enum Role {
   ;
 
   @Getter
+  @JsonIgnore
   private final Set<Permission> permissions;
 
+
+  @JsonIgnore
   public List<SimpleGrantedAuthority> getAuthorities() {
     var authorities = getPermissions()
             .stream()

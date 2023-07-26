@@ -36,7 +36,7 @@ public class GisementController {
 
     // http://localhost:8099/api/gisement/deletegisement/{id_gisement}
     @DeleteMapping("/deletegisement/{id_gisement}")
-    @PreAuthorize("hasAnyAuthority('geologieadmin:delete')")
+//    @PreAuthorize("hasAnyAuthority('geologieadmin:delete')")
     public void eraseGisement(@PathVariable("id_gisement") Long id_gisement){
 
         gisementService.deleteGisement(id_gisement);
@@ -111,4 +111,12 @@ public class GisementController {
 
         response.flushBuffer();
     }
+
+    @GetMapping("/count")
+    public List<Object[]> c(){
+
+        return gisementService.c();
+    }
+
+
 }

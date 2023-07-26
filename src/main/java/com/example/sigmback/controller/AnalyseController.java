@@ -10,8 +10,8 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/centre/analyse")
-@PreAuthorize("hasAnyRole('CENTRE_ADMIN','CENTRE_USER','CENTRE_CONFIRM')")
+@RequestMapping("/api/analyse")
+@PreAuthorize("hasAnyRole('CENTRE_ADMIN','CENTRE_USER','CENTRE_CONFIRM','GEOLOGIE_ADMIN','GEOLOGIE_USER','GEOLOGIE_CONSULT')")
 public class AnalyseController {
 
     @Autowired
@@ -43,7 +43,7 @@ public class AnalyseController {
 
     // http://localhost:8099/api/analyse/showanalyses
     @GetMapping("/showanalyses")
-    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read')")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read','geologieadmin:read','geologieuser:read','geologieconsult:read')")
     public List<Analyses> showAnalyses(){
 
         return analyseService.retrieveAnalyses();
@@ -51,7 +51,7 @@ public class AnalyseController {
 
     // http://localhost:8099/api/analyse/showanalyse/{id_analyse}
     @GetMapping("/showanalyse/{id_analyse}")
-    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read')")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read','geologieadmin:read','geologieuser:read','geologieconsult:read')")
     public Analyses showOneAnalyse(@PathVariable("id_analyse") Long id_analyse){
 
         return analyseService.retrieveOneAnalyse(id_analyse);
@@ -59,14 +59,14 @@ public class AnalyseController {
 
     // http://localhost:8099/api/analyse/showanalysebyechantillon/{id_echantillon}
     @GetMapping("/showanalysebyechantillon/{id_echantillon}")
-    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read')")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read','geologieadmin:read','geologieuser:read','geologieconsult:read')")
     public List<Analyses> showAnalyseByEchantillon(@PathVariable("id_echantillon") Long id_echantillon){
         return analyseService.retrieveAnalyseByEchantillon(id_echantillon);
     }
 
     // http://localhost:8099/api/analyse/showanalysesbyelement/{id_element}
     @GetMapping("/showanalysesbyelement/{id_element}")
-    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read')")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read','geologieadmin:read','geologieuser:read','geologieconsult:read')")
     public List<Analyses> showAnalyseByElement(@PathVariable("id_element") Long id_element){
         return analyseService.retrieveAnalyseByElements(id_element);
     }

@@ -23,7 +23,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class User implements UserDetails {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue
   private Long id;
   private String firstname;
   private String lastname;
@@ -38,6 +38,7 @@ public class User implements UserDetails {
   private List<Token> tokens;
 
   @Override
+  @JsonIgnore
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return role.getAuthorities();
   }

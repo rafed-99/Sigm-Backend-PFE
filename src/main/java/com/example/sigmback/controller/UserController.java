@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user/admin")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "Requestor-Type", exposedHeaders = "X-Get-Header")
+@RequestMapping("/api/admin/user")
 @PreAuthorize("hasRole('ADMIN')")
 public class UserController {
     @Autowired

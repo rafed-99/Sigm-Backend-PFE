@@ -110,5 +110,11 @@ public class PointController {
         response.flushBuffer();
     }
 
+    @GetMapping("/countp")
+    public List<Object[]> c(){
+
+        return pointService.c();
+    }
+
 
 }

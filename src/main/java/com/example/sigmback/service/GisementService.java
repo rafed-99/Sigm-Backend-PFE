@@ -119,4 +119,10 @@ public class GisementService implements IGisementService{
         ops.close();
 
     }
+
+    public List<Object[]> c (){
+        return iGisementRepository.countbysecteur();
+    }
+
+
 }

@@ -98,6 +98,7 @@ public class EchantillonController {
 
 
     @PostMapping(value = "/bordereau/{idBordereau}/report",produces = "application/pdf")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:create','geologieuser:create')")
     @ResponseBody
     public ResponseEntity<byte[]> getBorderauEchantillon(@RequestBody List<Echantillon> selectedEchantillons, @PathVariable Long idBordereau) throws IOException, JRException {
 
@@ -145,7 +146,7 @@ public class EchantillonController {
     //http://localhost:8099/api/echantillon/bordereau/report/{idBordereau}
     @GetMapping(value = "/bordereau/report/{idBordereau}",produces = "application/pdf")
     @ResponseBody
-    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read','centreadmin:read','centreuser:read','centreconfirm:read')")
     public ResponseEntity<byte[]> getBorderauEchantillonById(@PathVariable Long idBordereau) throws IOException, JRException {
 
 

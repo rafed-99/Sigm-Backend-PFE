@@ -141,4 +141,8 @@ public class PointService implements IPointService{
         ops.close();
 
     }
+
+    public List<Object[]> c (){
+        return iPointRepository.countbygisement();
+    }
 }

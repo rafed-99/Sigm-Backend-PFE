@@ -54,13 +54,17 @@ public class JwtService {
           UserDetails userDetails,
           long expiration
   ) {
+    var index = userDetails.getAuthorities().toString().indexOf("ROLE_");
+    System.out.println("index Role_ "+index);
+    var token = userDetails.getAuthorities().toString().substring(index,userDetails.getAuthorities().toString().length()-1);
+    System.out.println("token Role_ "+token);
     return Jwts
             .builder()
             .setClaims(extraClaims)
             .setSubject(userDetails.getUsername())
             .setIssuedAt(new Date(System.currentTimeMillis()))
             .setExpiration(new Date(System.currentTimeMillis() + expiration))
-            .claim("roles",userDetails.getAuthorities().toString())
+            .claim("roles",token)
             .signWith(getSignInKey(), SignatureAlgorithm.HS256)
             .compact();
   }
