@@ -118,5 +118,38 @@ public class GisementController {
         return gisementService.c();
     }
 
+    @GetMapping("/countgisement")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
+    public Long countPoint(){
 
+        return gisementService.countGisement();
+    }
+
+    @GetMapping("/countbyredeyef")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
+    public Long countByRedeyef(){
+
+        return gisementService.countGisementByRedeyef();
+    }
+
+    @GetMapping("/countbymoulares")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
+    public Long countByMoulares(){
+
+        return gisementService.countGisementByMoulares();
+    }
+
+    @GetMapping("/countbymetlaoui")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
+    public Long countByMetlaoui(){
+
+        return gisementService.countGisementByMetlaoui();
+    }
+
+    @GetMapping("/countbymdhilla")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
+    public Long countByMdhilla(){
+
+        return gisementService.countGisementByMdhilla();
+    }
 }

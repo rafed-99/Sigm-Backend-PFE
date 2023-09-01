@@ -116,5 +116,38 @@ public class PointController {
         return pointService.c();
     }
 
+    @GetMapping("/countpoint")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
+    public Long countPoint(){
 
+        return pointService.countPoint();
+    }
+
+    @GetMapping("/countpointredeyef")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
+    public Long countPointRedeyef(){
+
+        return pointService.countPointRedeyef();
+    }
+
+    @GetMapping("/countpointmoulares")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
+    public Long countPointMoulares(){
+
+        return pointService.countPointMoulares();
+    }
+
+    @GetMapping("/countpointmetlaoui")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
+    public Long countPointMetlaoui(){
+
+        return pointService.countPointMetlaoui();
+    }
+
+    @GetMapping("/countpointmdhilla")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
+    public Long countPointMdhilla(){
+
+        return pointService.countPointMdhilla();
+    }
 }

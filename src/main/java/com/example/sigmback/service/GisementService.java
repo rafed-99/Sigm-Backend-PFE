@@ -62,7 +62,6 @@ public class GisementService implements IGisementService{
 
     @Override
     public Long countGisementBySecteur(String secteur) {
-
         return iGisementRepository.countGisementBySecteur(secteur);
     }
 
@@ -124,5 +123,23 @@ public class GisementService implements IGisementService{
         return iGisementRepository.countbysecteur();
     }
 
+    public Long countGisement(){
+        return iGisementRepository.countGisement();
+    }
 
+    public Long countGisementByRedeyef(){
+        return iGisementRepository.countGisementBySecteurRedeyef();
+    }
+
+    public Long countGisementByMoulares(){
+        return iGisementRepository.countGisementBySecteurMoulares();
+    }
+
+    public Long countGisementByMetlaoui(){
+        return iGisementRepository.countGisementBySecteurMetlaoui();
+    }
+
+    public Long countGisementByMdhilla(){
+        return iGisementRepository.countGisementBySecteurMdhilla();
+    }
 }

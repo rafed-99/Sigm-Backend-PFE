@@ -145,4 +145,21 @@ public class PointService implements IPointService{
     public List<Object[]> c (){
         return iPointRepository.countbygisement();
     }
+
+    public Long countPoint(){
+        return iPointRepository.countPoints();
+    }
+
+    public Long countPointRedeyef(){
+        return iPointRepository.countPointsRedeyef();
+    }
+    public Long countPointMoulares(){
+        return iPointRepository.countPointsMoulares();
+    }
+    public Long countPointMetlaoui(){
+        return iPointRepository.countPointsMetlaoui();
+    }
+    public Long countPointMdhilla(){
+        return iPointRepository.countPointsMdhilla();
+    }
 }

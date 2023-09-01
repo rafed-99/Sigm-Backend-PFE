@@ -10,19 +10,4 @@ public class SigmBackApplication {
 		SpringApplication.run(SigmBackApplication.class, args);
 	}
 
-//	@Bean
-//	public CommandLineRunner commandLineRunner(
-//			AuthenticationService service
-//	) {
-//		return args -> {
-//			var admin = RegisterRequest.builder()
-//					.nom("Admin")
-//					.prenom("Admin")
-//					.email("admin@mail.com")
-//					.password("password")
-//					.role(ADMIN)
-//					.build();
-//			System.out.println("Admin token: " + service.register(admin).getToken());
-//		};
-//	}
 }
