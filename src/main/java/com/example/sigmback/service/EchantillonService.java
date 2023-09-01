@@ -313,4 +313,20 @@ public class EchantillonService implements IEchantillonService{
         return file;*/
     }
 
+    public Long countToVerifySample(){
+        return iEchantillonRepository.countToVerify();
+    }
+
+    public Long countSentSample(){
+        return iEchantillonRepository.countSent();
+    }
+
+    public Long countReceivedSample(){
+        return iEchantillonRepository.countReceived();
+    }
+
+    public Long countAnalysedSample(){
+        return iEchantillonRepository.countAnalysed();
+    }
+
 }

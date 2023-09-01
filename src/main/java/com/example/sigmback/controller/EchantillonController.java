@@ -167,5 +167,31 @@ public class EchantillonController {
         return response;
     }
 
+    @GetMapping("/counttoverify")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
+    public Long countToVerify(){
 
+        return echantillonService.countToVerifySample();
+    }
+
+    @GetMapping("/countsent")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
+    public Long countSent(){
+
+        return echantillonService.countSentSample();
+    }
+
+    @GetMapping("/countreceived")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
+    public Long countReceived(){
+
+        return echantillonService.countReceivedSample();
+    }
+
+    @GetMapping("/countanalysed")
+    @PreAuthorize("hasAnyAuthority('geologieadmin:read','geologieuser:read','geologieconsult:read')")
+    public Long countAnalysed(){
+
+        return echantillonService.countAnalysedSample();
+    }
 }
