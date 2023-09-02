@@ -155,5 +155,20 @@ public class BordereauService implements IBordereauService{
 
     }
 
+    public Long countToVerifyReceipt(){
+        return iBordereauRepository.countToVerify();
+    }
+
+    public Long countOnHoldReceipt(){
+        return iBordereauRepository.countOnHold();
+    }
+
+    public Long countInProgressReceipt(){
+        return iBordereauRepository.countInProgress();
+    }
+
+    public Long countAnalysedReceipt(){
+        return iBordereauRepository.countAnalysed();
+    }
 
 }

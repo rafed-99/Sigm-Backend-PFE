@@ -60,5 +60,16 @@ public class AnalyseService implements IAnalyseService{
         return iElementRepository.findById(id_element).get().getAnalyses();
     }
 
+    public Long countNewAnalyse(){
+        return iAnalyseRepository.countNew();
+    }
+
+    public Long countConfirmAnalyse(){
+        return iAnalyseRepository.countConfirmed();
+    }
+
+    public Long countValidAnalyse(){
+        return iAnalyseRepository.countValid();
+    }
 
 }

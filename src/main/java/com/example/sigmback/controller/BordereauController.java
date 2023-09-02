@@ -108,4 +108,32 @@ public class BordereauController {
         return bordereauService.retrieveBordereauByEchantillon(idEchantillon);
     }
 
+    @GetMapping("/counttoverifyreceipt")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read')")
+    public Long countToVerify(){
+
+        return bordereauService.countToVerifyReceipt();
+    }
+
+    @GetMapping("/countonholdreceipt")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read')")
+    public Long countOnHold(){
+
+        return bordereauService.countOnHoldReceipt();
+    }
+
+    @GetMapping("/countinprogressreceipt")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read')")
+    public Long countInProgress(){
+
+        return bordereauService.countInProgressReceipt();
+    }
+
+    @GetMapping("/countanalysedreceipt")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read')")
+    public Long countAnalysed(){
+
+        return bordereauService.countAnalysedReceipt();
+    }
+
 }

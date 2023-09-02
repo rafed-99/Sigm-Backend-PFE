@@ -70,4 +70,25 @@ public class AnalyseController {
     public List<Analyses> showAnalyseByElement(@PathVariable("id_element") Long id_element){
         return analyseService.retrieveAnalyseByElements(id_element);
     }
+
+    @GetMapping("/countnew")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read')")
+    public Long countNew(){
+
+        return analyseService.countNewAnalyse();
+    }
+
+    @GetMapping("/countconfirm")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read')")
+    public Long countConfirm(){
+
+        return analyseService.countConfirmAnalyse();
+    }
+
+    @GetMapping("/countvalid")
+    @PreAuthorize("hasAnyAuthority('centreadmin:read','centreuser:read','centreconfirm:read')")
+    public Long countValid(){
+
+        return analyseService.countValidAnalyse();
+    }
 }
