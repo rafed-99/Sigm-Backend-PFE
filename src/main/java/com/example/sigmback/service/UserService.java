@@ -33,4 +33,26 @@ public class UserService {
     public void deletePoint(Long id_point) {
         userRepository.deleteById(id_point);
     }
+
+    public Long countAdmin(){
+        return userRepository.countAdminUser();
+    }
+    public Long countGeologyAdmin(){
+        return userRepository.countGeologyAdminUser();
+    }
+    public Long countGeologyUser(){
+        return userRepository.countGeologyUser();
+    }
+    public Long countGeologyConsult(){
+        return userRepository.countGeologyConsultantUser();
+    }
+    public Long countCenterAdmin(){
+        return userRepository.countCenterAdminUser();
+    }
+    public Long countCenterUser(){
+        return userRepository.countCenterUser();
+    }
+    public Long countCenterConfirm(){
+        return userRepository.countCenterConfirmUser();
+    }
 }

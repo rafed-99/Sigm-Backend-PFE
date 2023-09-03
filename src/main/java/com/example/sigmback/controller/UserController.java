@@ -42,4 +42,53 @@ public class UserController {
 
         return userService.retrievePoints();
     }
+
+    @GetMapping("/countadmin")
+    @PreAuthorize("hasAuthority('admin:read')")
+    public Long countAdmin(){
+
+        return userService.countAdmin();
+    }
+
+    @GetMapping("/countgeologyadmin")
+    @PreAuthorize("hasAuthority('admin:read')")
+    public Long countGeologyAdmin(){
+
+        return userService.countGeologyAdmin();
+    }
+
+    @GetMapping("/countgeologyuser")
+    @PreAuthorize("hasAuthority('admin:read')")
+    public Long countGeologyUser(){
+
+        return userService.countGeologyUser();
+    }
+
+    @GetMapping("/countgeologyconsult")
+    @PreAuthorize("hasAuthority('admin:read')")
+    public Long countGeologyConsult(){
+
+        return userService.countGeologyConsult();
+    }
+
+    @GetMapping("/countcenteradmin")
+    @PreAuthorize("hasAuthority('admin:read')")
+    public Long countCenterAdmin(){
+
+        return userService.countCenterAdmin();
+    }
+
+    @GetMapping("/countcenteruser")
+    @PreAuthorize("hasAuthority('admin:read')")
+    public Long countCenterUser(){
+
+        return userService.countCenterUser();
+    }
+
+    @GetMapping("/countcenterconfirm")
+    @PreAuthorize("hasAuthority('admin:read')")
+    public Long countCenterConfirm(){
+
+        return userService.countCenterConfirm();
+    }
 }
